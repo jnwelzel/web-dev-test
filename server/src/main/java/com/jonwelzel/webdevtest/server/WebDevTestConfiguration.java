@@ -1,4 +1,4 @@
-package com.jonwelzel.webdevtest;
+package com.jonwelzel.webdevtest.server;
 
 import io.dropwizard.Configuration;
 

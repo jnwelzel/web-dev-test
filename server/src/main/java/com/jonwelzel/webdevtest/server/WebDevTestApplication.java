@@ -1,7 +1,7 @@
-package com.jonwelzel.webdevtest;
+package com.jonwelzel.webdevtest.server;
 
 import com.hubspot.dropwizard.guice.GuiceBundle;
-import com.jonwelzel.webdevtest.di.ApplicationModule;
+import com.jonwelzel.webdevtest.server.di.ApplicationModule;
 import io.dropwizard.Application;
 import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
 import io.dropwizard.configuration.SubstitutingSourceProvider;

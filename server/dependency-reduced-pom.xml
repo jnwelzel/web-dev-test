@@ -69,7 +69,7 @@
               <transformers>
                 <transformer />
                 <transformer>
-                  <mainClass>com.jonwelzel.webdevtest.WebDevTestApplication</mainClass>
+                  <mainClass>com.jonwelzel.webdevtest.server.WebDevTestApplication</mainClass>
                 </transformer>
               </transformers>
             </configuration>

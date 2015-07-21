@@ -1,4 +1,4 @@
-package com.jonwelzel.webdevtest.di;
+package com.jonwelzel.webdevtest.server.di;
 
 import com.google.inject.AbstractModule;
 

@@ -2,8 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.jonwelzel</groupId>
-    <artifactId>web-dev-test</artifactId>
+    <groupId>com.jonwelzel.webdevtest</groupId>
+    <artifactId>server</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <packaging>jar</packaging>
@@ -80,36 +80,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>pl.allegro</groupId>
-                <artifactId>grunt-maven-plugin</artifactId>
-                <version>1.5.0</version>
-                <configuration>
-                    <npmEnvironmentVar>
-                        <PHANTOMJS_CDNURL>http://cnpmjs.org/downloads</PHANTOMJS_CDNURL>
-                    </npmEnvironmentVar>
-                    
-                    <filteredResources>
-                        <filteredResource>maven-properties.json</filteredResource>
-                    </filteredResources>
-                    
-                    <excludedResources>
-                        <excludedResource>exclude.me</excludedResource>
-                    </excludedResources>
-                    
-                    <warTargetDirectory>/</warTargetDirectory>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>create-resources</goal>
-                            <goal>npm</goal>
-                            <goal>grunt</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
@@ -148,7 +118,7 @@
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.jonwelzel.webdevtest.WebDevTestApplication</mainClass>
+                                    <mainClass>com.jonwelzel.webdevtest.server.WebDevTestApplication</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
