@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.jonwelzel</groupId>
-  <artifactId>web-dev-test</artifactId>
+  <groupId>com.jonwelzel.webdevtest</groupId>
+  <artifactId>server</artifactId>
   <name>web-dev-test</name>
   <version>1.0.0-SNAPSHOT</version>
   <description>A test web app for a dev opening at MP</description>
@@ -21,32 +21,6 @@
   </licenses>
   <build>
     <plugins>
-      <plugin>
-        <groupId>pl.allegro</groupId>
-        <artifactId>grunt-maven-plugin</artifactId>
-        <version>1.5.0</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>create-resources</goal>
-              <goal>npm</goal>
-              <goal>grunt</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <npmEnvironmentVar>
-            <PHANTOMJS_CDNURL>http://cnpmjs.org/downloads</PHANTOMJS_CDNURL>
-          </npmEnvironmentVar>
-          <filteredResources>
-            <filteredResource>maven-properties.json</filteredResource>
-          </filteredResources>
-          <excludedResources>
-            <excludedResource>exclude.me</excludedResource>
-          </excludedResources>
-          <warTargetDirectory>/</warTargetDirectory>
-        </configuration>
-      </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.1</version>
@@ -158,6 +132,7 @@
   <properties>
     <dropwizard.version>0.8.1</dropwizard.version>
     <jersey.version>2.17</jersey.version>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 </project>
