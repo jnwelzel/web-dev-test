@@ -1,8 +1,8 @@
 package com.jonwelzel.webdevtest.server.persistence;
 
 import com.google.inject.Singleton;
+import com.jonwelzel.webdevtest.server.models.Candidate;
 import com.jonwelzel.webdevtest.server.models.Skill;
-import com.jonwelzel.webdevtest.server.models.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,25 +13,26 @@ import java.util.List;
 @Singleton
 public class InMemoryStore {
 
-    List<User> users = new ArrayList<>();
-    List<Skill> skills = new ArrayList<>();
+    List<Candidate> candidates = new ArrayList<>();
+    List<Skill> skillsList = new ArrayList<>();
 
-    public List<User> getUsers() {
-        return users;
+    public List<Candidate> getCandidates() {
+        return candidates;
     }
 
-    public void addUser(User user) {
-        users.add(user);
+    public void addCandidate(Candidate candidate) {
+        candidates.add(candidate);
     }
 
-    public List<Skill> getSkills() {
-        if(skills.isEmpty()) {
+    public List<Skill> getSkillsList() {
+        if(skillsList.isEmpty()) {
             String[] descriptions = {"HTML", "CSS", "Javascript", "Python", "Django", "Desenvolvimento iOS",
                     "Desenvolvimento Android"};
             for (int i = 0; i < descriptions.length; i++) {
-                skills.add(new Skill(descriptions[i], 0));
+                skillsList.add(new Skill(descriptions[i], 0));
             }
         }
-        return skills;
+        return skillsList;
     }
+
 }

@@ -1,7 +1,5 @@
 package com.jonwelzel.webdevtest.server.persistence.daos;
 
-import com.jonwelzel.webdevtest.server.di.interceptors.OnSave;
-import com.jonwelzel.webdevtest.server.di.interceptors.OnUpdate;
 import com.jonwelzel.webdevtest.server.persistence.BaseBean;
 
 import java.util.List;
@@ -15,10 +13,8 @@ public interface BaseDao<T extends BaseBean> {
 
     T findById(String id);
 
-
     T save(T obj);
 
-    @OnUpdate
     T update(T obj);
 
     T delete(T obj);

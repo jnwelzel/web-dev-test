@@ -9,12 +9,12 @@ import java.util.Date;
 /**
  * Created by jwelzel on 22/07/15.
  */
-public class OnSaveInterceptor implements MethodInterceptor {
+public class OnUpdateInterceptor implements MethodInterceptor {
 
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {
         BaseBean bean = (BaseBean) invocation.getArguments()[0];
-        bean.setDateCreated(new Date());
+        bean.setDateUpdated(new Date());
         return invocation.proceed();
     }
 

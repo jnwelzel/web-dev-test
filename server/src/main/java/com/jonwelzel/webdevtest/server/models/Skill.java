@@ -8,14 +8,14 @@ import com.jonwelzel.webdevtest.server.persistence.AbstractBaseBean;
 public class Skill extends AbstractBaseBean {
 
     private String description;
-    private Integer level = 0;
+    private Integer score;
 
     public Skill() {
     }
 
-    public Skill(String description, Integer level) {
+    public Skill(String description, Integer score) {
         this.description = description;
-        this.level = level;
+        this.score = score;
     }
 
     public String getDescription() {
@@ -26,11 +26,11 @@ public class Skill extends AbstractBaseBean {
         this.description = description;
     }
 
-    public Integer getLevel() {
-        return level;
+    public Integer getScore() {
+        return score;
     }
 
-    public void setLevel(Integer level) {
-        this.level = level;
+    public void setScore(Integer score) {
+        this.score = score;
     }
 }
