@@ -27,7 +27,7 @@ public class CandidateResource {
 
     @POST
     public Candidate submitForm(Candidate candidate) {
-        candidate = service.saveCandidate(candidate);
+        candidate = service.saveCandidate(new Candidate());
         return candidate;
     }
 

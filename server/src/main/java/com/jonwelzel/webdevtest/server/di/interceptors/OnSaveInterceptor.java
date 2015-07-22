@@ -15,6 +15,7 @@ public class OnSaveInterceptor implements MethodInterceptor {
     public Object invoke(MethodInvocation invocation) throws Throwable {
         BaseBean bean = (BaseBean) invocation.getArguments()[0];
         bean.setDateCreated(new Date());
+        bean.setDateUpdated(new Date());
         return invocation.proceed();
     }
 
