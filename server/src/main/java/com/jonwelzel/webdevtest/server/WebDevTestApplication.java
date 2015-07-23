@@ -20,6 +20,11 @@ public class WebDevTestApplication extends Application<WebDevTestConfiguration> 
     }
 
     @Override
+    public String getName() {
+        return "web-dev-test";
+    }
+
+    @Override
     public void initialize(Bootstrap<WebDevTestConfiguration> bootstrap) {
         guiceBundle = GuiceBundle.<WebDevTestConfiguration>newBuilder()
                 .addModule(new ApplicationModule())
@@ -27,6 +32,7 @@ public class WebDevTestApplication extends Application<WebDevTestConfiguration> 
                 .setConfigClass(WebDevTestConfiguration.class)
                 .build();
         bootstrap.addBundle(guiceBundle);
+
         bootstrap.setConfigurationSourceProvider(new SubstitutingSourceProvider(bootstrap
                 .getConfigurationSourceProvider(), new EnvironmentVariableSubstitutor(false)));
     }
