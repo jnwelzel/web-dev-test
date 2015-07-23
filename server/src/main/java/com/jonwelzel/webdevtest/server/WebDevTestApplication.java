@@ -2,6 +2,7 @@ package com.jonwelzel.webdevtest.server;
 
 import com.hubspot.dropwizard.guice.GuiceBundle;
 import com.jonwelzel.webdevtest.server.di.ApplicationModule;
+import com.jonwelzel.webdevtest.server.utils.EnvVarsUtils;
 import io.dropwizard.Application;
 import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
 import io.dropwizard.configuration.SubstitutingSourceProvider;
@@ -26,6 +27,7 @@ public class WebDevTestApplication extends Application<WebDevTestConfiguration> 
 
     @Override
     public void initialize(Bootstrap<WebDevTestConfiguration> bootstrap) {
+        EnvVarsUtils.checkEnvVars();
         guiceBundle = GuiceBundle.<WebDevTestConfiguration>newBuilder()
                 .addModule(new ApplicationModule())
                 .enableAutoConfig(getClass().getPackage().getName())
@@ -33,8 +35,11 @@ public class WebDevTestApplication extends Application<WebDevTestConfiguration> 
                 .build();
         bootstrap.addBundle(guiceBundle);
 
-        bootstrap.setConfigurationSourceProvider(new SubstitutingSourceProvider(bootstrap
-                .getConfigurationSourceProvider(), new EnvironmentVariableSubstitutor(false)));
+        bootstrap.setConfigurationSourceProvider(
+                new SubstitutingSourceProvider(bootstrap.getConfigurationSourceProvider(),
+                        new EnvironmentVariableSubstitutor(false)
+                )
+        );
     }
 
     @Override

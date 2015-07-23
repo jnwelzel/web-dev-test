@@ -1,6 +1,7 @@
 package com.jonwelzel.webdevtest.server.concurrent;
 
 import com.jonwelzel.webdevtest.server.models.EmailInterface;
+import com.jonwelzel.webdevtest.server.utils.EnvVarsUtils;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
@@ -25,9 +26,9 @@ public class EmailThread implements Runnable {
             Email simpleEmail = new SimpleEmail();
             simpleEmail.setSmtpPort(587);
             simpleEmail.setHostName("smtp.gmail.com");
-            simpleEmail.setAuthentication("jnwelzel@gmail.com", "");
+            simpleEmail.setAuthentication(EnvVarsUtils.getEmailAccountName() + "@gmail.com", EnvVarsUtils.getEmailAccountPwd());
             simpleEmail.setStartTLSEnabled(true);
-            simpleEmail.setFrom("jnwelzel@gmail.com", "Meus Pedidos - Cadastro de Perfil");
+            simpleEmail.setFrom(EnvVarsUtils.getEmailAccountName() + "@gmail.com", "Meus Pedidos - Cadastro de Perfil");
             simpleEmail.setSubject(email.getSubject());
             simpleEmail.setMsg(email.getMessage());
             simpleEmail.addTo(email.getTo());

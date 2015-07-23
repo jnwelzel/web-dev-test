@@ -1,2 +1,0 @@
-emailAddress: ${WEB_DEV_TEST_EMAIL_ADDR:-kkk}
-emailPassword: ${WEB_DEV_TEST_EMAIL_PWD:-kkk}
