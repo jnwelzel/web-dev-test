@@ -2,6 +2,7 @@ package com.jonwelzel.webdevtest.server.models;
 
 import com.jonwelzel.webdevtest.server.persistence.BaseBean;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -69,5 +70,15 @@ public class Candidate implements BaseBean {
 
     public void setSkills(List<Skill> skills) {
         this.skills = skills;
+    }
+
+    public List<Skill> getSkillsByGroup(SkillGroup group) {
+        List<Skill> result = new ArrayList<>();
+        for(Skill skill : skills) {
+            if(skill.getSkillGroup().equals(group)) {
+                result.add(skill);
+            }
+        }
+        return result;
     }
 }

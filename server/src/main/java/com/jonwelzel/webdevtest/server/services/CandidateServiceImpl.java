@@ -11,15 +11,18 @@ import com.jonwelzel.webdevtest.server.persistence.daos.CandidateDaoInterface;
 public class CandidateServiceImpl implements CandidateServiceInterface {
 
     private CandidateDaoInterface dao;
+    private EmailServiceInterface emailService;
 
     @Inject
-    public CandidateServiceImpl(@MockDao CandidateDaoInterface dao) {
+    public CandidateServiceImpl(@MockDao CandidateDaoInterface dao, EmailServiceInterface emailService) {
         this.dao = dao;
+        this.emailService = emailService;
     }
 
     @Override
     public Candidate saveCandidate(Candidate candidate) {
-        // TODO se salvou mandar os emails
-        return dao.save(candidate);
+        candidate = dao.save(candidate);
+        emailService.sendRegistrationEmails(candidate);
+        return candidate;
     }
 }

@@ -9,13 +9,15 @@ public class Skill extends AbstractBaseBean {
 
     private String description;
     private Integer score;
+    private SkillGroup skillGroup;
 
     public Skill() {
     }
 
-    public Skill(String description, Integer score) {
+    public Skill(String description, Integer score, SkillGroup group) {
         this.description = description;
         this.score = score;
+        this.skillGroup = group;
     }
 
     public String getDescription() {
@@ -32,5 +34,13 @@ public class Skill extends AbstractBaseBean {
 
     public void setScore(Integer score) {
         this.score = score;
+    }
+
+    public SkillGroup getSkillGroup() {
+        return skillGroup;
+    }
+
+    public void setSkillGroup(SkillGroup skillGroup) {
+        this.skillGroup = skillGroup;
     }
 }

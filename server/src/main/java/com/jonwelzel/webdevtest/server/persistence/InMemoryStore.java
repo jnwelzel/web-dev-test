@@ -3,6 +3,7 @@ package com.jonwelzel.webdevtest.server.persistence;
 import com.google.inject.Singleton;
 import com.jonwelzel.webdevtest.server.models.Candidate;
 import com.jonwelzel.webdevtest.server.models.Skill;
+import com.jonwelzel.webdevtest.server.models.SkillGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +27,15 @@ public class InMemoryStore {
 
     public List<Skill> getSkillsList() {
         if(skillsList.isEmpty()) {
-            String[] descriptions = {"HTML", "CSS", "Javascript", "Python", "Django", "Desenvolvimento iOS",
-                    "Desenvolvimento Android"};
-            for (int i = 0; i < descriptions.length; i++) {
-                skillsList.add(new Skill(descriptions[i], 0));
-            }
+            skillsList.add(new Skill("HTML", 0, SkillGroup.FRONTEND));
+            skillsList.add(new Skill("CSS", 0, SkillGroup.FRONTEND));
+            skillsList.add(new Skill("Javascript", 0, SkillGroup.FRONTEND));
+
+            skillsList.add(new Skill("Python", 0, SkillGroup.BACKEND));
+            skillsList.add(new Skill("Django", 0, SkillGroup.BACKEND));
+
+            skillsList.add(new Skill("Desenvolvimento iOS", 0, SkillGroup.MOBILE));
+            skillsList.add(new Skill("Desenvolvimento Android", 0, SkillGroup.MOBILE));
         }
         return skillsList;
     }

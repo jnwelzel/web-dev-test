@@ -1,0 +1,57 @@
+{
+  "name":"Chuck Norris",
+  "email":"chuck_norris@test.com",
+  "dateCreated": 1437668626665,
+  "dateUpdated": 1437668626665,
+  "skills":[
+    {
+      "description":"HTML",
+      "dateCreated": 1437668626665,
+      "dateUpdated": 1437668626665,
+      "score":10,
+      "skillGroup":"FRONTEND"
+    },
+    {
+      "description":"CSS",
+      "dateCreated": 1437668626665,
+      "dateUpdated": 1437668626665,
+      "score":10,
+      "skillGroup":"FRONTEND"
+    },
+    {
+      "description":"Javascript",
+      "dateCreated": 1437668626665,
+      "dateUpdated": 1437668626665,
+      "score":10,
+      "skillGroup":"FRONTEND"
+    },
+    {
+      "description":"Python",
+      "dateCreated": 1437668626665,
+      "dateUpdated": 1437668626665,
+      "score":10,
+      "skillGroup":"BACKEND"
+    },
+    {
+      "description":"Django",
+      "dateCreated": 1437668626665,
+      "dateUpdated": 1437668626665,
+      "score":10,
+      "skillGroup":"BACKEND"
+    },
+    {
+      "description":"Desenvolvimento iOS",
+      "dateCreated": 1437668626665,
+      "dateUpdated": 1437668626665,
+      "score":10,
+      "skillGroup":"MOBILE"
+    },
+    {
+      "description":"Desenvolvimento Android",
+      "dateCreated": 1437668626665,
+      "dateUpdated": 1437668626665,
+      "score":10,
+      "skillGroup":"MOBILE"
+    }
+  ] 
+}

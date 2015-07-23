@@ -27,7 +27,8 @@ public class CandidateResource {
 
     @POST
     public Candidate submitForm(Candidate candidate) {
-        candidate = service.saveCandidate(new Candidate());
+        // curl -H "Content-Type: application/json" http://localhost:8080/candidates --data @candidate_me.json
+        candidate = service.saveCandidate(candidate);
         return candidate;
     }
 

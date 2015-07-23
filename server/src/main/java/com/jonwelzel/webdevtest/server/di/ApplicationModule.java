@@ -13,6 +13,8 @@ import com.jonwelzel.webdevtest.server.persistence.daos.SkillDaoInterface;
 import com.jonwelzel.webdevtest.server.persistence.daos.SkillDaoMockImpl;
 import com.jonwelzel.webdevtest.server.services.CandidateServiceImpl;
 import com.jonwelzel.webdevtest.server.services.CandidateServiceInterface;
+import com.jonwelzel.webdevtest.server.services.EmailServiceImpl;
+import com.jonwelzel.webdevtest.server.services.EmailServiceInterface;
 import com.jonwelzel.webdevtest.server.services.SkillServiceImpl;
 import com.jonwelzel.webdevtest.server.services.SkillServiceInterface;
 
@@ -30,6 +32,7 @@ public class ApplicationModule extends AbstractModule {
         // Services
         bind(SkillServiceInterface.class).to(SkillServiceImpl.class);
         bind(CandidateServiceInterface.class).to(CandidateServiceImpl.class);
+        bind(EmailServiceInterface.class).to(EmailServiceImpl.class);
 
         // Method interceptors
         bindInterceptor(Matchers.any(), Matchers.annotatedWith(OnSave.class), new OnSaveInterceptor());
