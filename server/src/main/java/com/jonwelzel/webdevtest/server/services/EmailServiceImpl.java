@@ -36,7 +36,8 @@ public class EmailServiceImpl implements EmailServiceInterface {
         }
     }
 
-    private List<EmailInterface> getEmailsForTypes(List<EmailType> emailTypes, String candidateEmail) {
+    @Override
+    public List<EmailInterface> getEmailsForTypes(List<EmailType> emailTypes, String candidateEmail) {
         if(candidateEmail == null || candidateEmail.equals("")) {
             throw new IllegalArgumentException("O email do candidato não pode estar nulo");
         }
@@ -50,7 +51,8 @@ public class EmailServiceImpl implements EmailServiceInterface {
         return emails;
     }
 
-    private List<EmailType> getEmailTypesToSend(Candidate candidate) {
+    @Override
+    public List<EmailType> getEmailTypesToSend(Candidate candidate) {
         if(candidate.getSkills() == null || candidate.getSkills().isEmpty()) {
             throw new IllegalArgumentException("As habilidades do candidato não podem estar nulas");
         }
@@ -71,7 +73,8 @@ public class EmailServiceImpl implements EmailServiceInterface {
         return types;
     }
 
-    private Integer calculateGroupScore(List<Skill> skills) {
+    @Override
+    public Integer calculateGroupScore(List<Skill> skills) {
         Integer result = 0;
         for(Skill skill : skills) {
             if(skill.getScore() >= MINIMUM_SCORE) {

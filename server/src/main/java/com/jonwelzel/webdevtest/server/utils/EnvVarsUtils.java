@@ -5,8 +5,8 @@ package com.jonwelzel.webdevtest.server.utils;
  */
 public class EnvVarsUtils {
 
-    private static final String EMAIL_ADDR = "WEB_DEV_TEST_EMAIL_ADDR";
-    private static final String EMAIL_PWD = "WEB_DEV_TEST_EMAIL_PWD";
+    public static final String EMAIL_ADDR = "WEB_DEV_TEST_EMAIL_ADDR";
+    public static final String EMAIL_PWD = "WEB_DEV_TEST_EMAIL_PWD";
 
     public static void checkEnvVars() {
         String gmailAccountName = System.getenv(EMAIL_ADDR);

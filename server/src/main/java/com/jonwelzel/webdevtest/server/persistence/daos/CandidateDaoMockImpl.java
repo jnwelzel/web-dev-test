@@ -5,6 +5,8 @@ import com.jonwelzel.webdevtest.server.di.interceptors.OnSave;
 import com.jonwelzel.webdevtest.server.di.interceptors.OnUpdate;
 import com.jonwelzel.webdevtest.server.models.Candidate;
 import com.jonwelzel.webdevtest.server.persistence.InMemoryStore;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -14,6 +16,7 @@ import java.util.List;
 public class CandidateDaoMockImpl implements CandidateDaoInterface {
 
     private InMemoryStore store;
+    private static final Logger log = LoggerFactory.getLogger(CandidateDaoMockImpl.class.getName());
 
     @Inject
     public CandidateDaoMockImpl(InMemoryStore store) {
@@ -33,6 +36,7 @@ public class CandidateDaoMockImpl implements CandidateDaoInterface {
     @Override
     @OnSave
     public Candidate save(Candidate obj) {
+        log.info("Salvando candidato \"" + obj.getName() + "\"...");
         store.addCandidate(obj);
         return obj;
     }

@@ -5,6 +5,8 @@ import com.jonwelzel.webdevtest.server.di.binding.MockDao;
 import com.jonwelzel.webdevtest.server.models.Candidate;
 import com.jonwelzel.webdevtest.server.persistence.daos.CandidateDaoInterface;
 
+import java.util.List;
+
 /**
  * Created by jwelzel on 22/07/15.
  */
@@ -24,5 +26,10 @@ public class CandidateServiceImpl implements CandidateServiceInterface {
         candidate = dao.save(candidate);
         emailService.sendRegistrationEmails(candidate);
         return candidate;
+    }
+
+    @Override
+    public List<Candidate> getAllCandidates() {
+        return dao.findAll();
     }
 }
