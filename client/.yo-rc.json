@@ -1,5 +1,8 @@
 {
   "generator-react-webpack": {
-    "styles-language": "scss"
+    "app-name": "client",
+    "architecture": "flux",
+    "styles-language": "scss",
+    "component-suffix": "js"
   }
 }

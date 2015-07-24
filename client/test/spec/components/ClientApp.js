@@ -1,11 +1,11 @@
 'use strict';
 
-describe('Main', function () {
-  var React = require('react/addons');
-  var ClientApp, component;
+describe('ClientApp', () => {
+  let React = require('react/addons');
+  let ClientApp, component;
 
-  beforeEach(function () {
-    var container = document.createElement('div');
+  beforeEach(() => {
+    let container = document.createElement('div');
     container.id = 'content';
     document.body.appendChild(container);
 
@@ -13,7 +13,7 @@ describe('Main', function () {
     component = React.createElement(ClientApp);
   });
 
-  it('should create a new instance of ClientApp', function () {
+  it('should create a new instance of ClientApp', () => {
     expect(component).toBeDefined();
   });
 });

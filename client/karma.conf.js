@@ -7,11 +7,18 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['jasmine'],
     files: [
-      'test/helpers/**/*.js',
-      'test/spec/components/**/*.js'
+      'test/helpers/pack/**/*.js',
+      'test/helpers/react/**/*.js',
+      'test/spec/components/**/*.js',
+      'test/spec/stores/**/*.js',
+      'test/spec/actions/**/*.js'
     ],
     preprocessors: {
-      'test/spec/components/**/*.js': ['webpack']
+      'test/helpers/createComponent.js': ['webpack'],
+      'test/spec/components/**/*.js': ['webpack'],
+      'test/spec/components/**/*.jsx': ['webpack'],
+      'test/spec/stores/**/*.js': ['webpack'],
+      'test/spec/actions/**/*.js': ['webpack']
     },
     webpack: {
       cache: true,
@@ -26,24 +33,35 @@ module.exports = function (config) {
           test: /\.png/,
           loader: 'url-loader?limit=10000&mimetype=image/png'
         }, {
-          test: /\.js$/,
-          loader: 'jsx-loader?harmony'
+          test: /\.(js|jsx)$/,
+          loader: 'babel-loader',
+          exclude: /node_modules/
         }, {
           test: /\.scss/,
           loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
         }, {
           test: /\.css$/,
           loader: 'style-loader!css-loader'
+        }, {
+          test: /\.woff/,
+          loader: 'url-loader?limit=10000&mimetype=application/font-woff'
+        }, {
+          test: /\.woff2/,
+          loader: 'url-loader?limit=10000&mimetype=application/font-woff2'
         }]
       },
       resolve: {
         alias: {
           'styles': path.join(process.cwd(), './src/styles/'),
-          'components': path.join(process.cwd(), './src/scripts/components/')
+          'components': path.join(process.cwd(), './src/components/'),
+          'stores': '../../../src/stores/',
+          'actions': '../../../src/actions/',
+          'helpers': path.join(process.cwd(), './test/helpers/')
         }
       }
     },
-    webpackServer: {
+    webpackMiddleware: {
+      noInfo: true,
       stats: {
         colors: true
       }
@@ -53,17 +71,14 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     colors: true,
     autoWatch: false,
-    // Start these browsers, currently available:
-    // - Chrome
-    // - ChromeCanary
-    // - Firefox
-    // - Opera
-    // - Safari (only Mac)
-    // - PhantomJS
-    // - IE (only Windows)
     browsers: ['PhantomJS'],
-    reporters: ['progress'],
+    reporters: ['dots'],
     captureTimeout: 60000,
-    singleRun: true
+    singleRun: true,
+    plugins: [
+        require('karma-webpack'),
+        require('karma-jasmine'),
+        require('karma-phantomjs-launcher')
+    ]
   });
 };

@@ -16,10 +16,10 @@ module.exports = {
 
   cache: true,
   debug: true,
-  devtool: false,
+  devtool: 'sourcemap',
   entry: [
       'webpack/hot/only-dev-server',
-      './src/scripts/components/main.js'
+      './src/components/main.js'
   ],
 
   stats: {
@@ -28,22 +28,25 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['', '.js'],
+    extensions: ['', '.js', '.jsx'],
     alias: {
-      'styles': '../../../src/styles',
-      'components': '../../../src/scripts/components/'
+      'styles': __dirname + '/src/styles',
+      'mixins': __dirname + '/src/mixins',
+      'components': __dirname + '/src/components/',
+      'stores': __dirname + '/src/stores/',
+      'actions': __dirname + '/src/actions/'
     }
   },
   module: {
     preLoaders: [{
-      test: /\.js$/,
+      test: /\.(js|jsx)$/,
       exclude: /node_modules/,
-      loader: 'jsxhint'
+      loader: 'eslint-loader'
     }],
     loaders: [{
-      test: /\.js$/,
+      test: /\.(js|jsx)$/,
       exclude: /node_modules/,
-      loader: 'react-hot!jsx-loader?harmony'
+      loader: 'react-hot!babel-loader'
     }, {
       test: /\.scss/,
       loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
@@ -51,14 +54,13 @@ module.exports = {
       test: /\.css$/,
       loader: 'style-loader!css-loader'
     }, {
-      test: /\.(png|jpg)$/,
+      test: /\.(png|jpg|woff|woff2)$/,
       loader: 'url-loader?limit=8192'
     }]
   },
 
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.HotModuleReplacementPlugin()
   ]
 
 };
