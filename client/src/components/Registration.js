@@ -25,7 +25,7 @@ function _validateFields(name, email) {
     errors.push('O campo \'Nome\' deve possuir no mínimo 3 caracteres');
   }
   if(email === null || email.length === 0) {
-    errors.push('O campo \'email\' é obrigatório');
+    errors.push('O campo \'Email\' é obrigatório');
   } else if(!_validateEmail(email)) {
     errors.push('O email informado é inválido');
   }
@@ -83,11 +83,13 @@ var Registration = React.createClass({
                 <Input placeholder="Nome completo (obrigatório)"
                   style={{color: '#ddd'}}
                   ref="candidateName"
-                  onUpdate={this._handleNameChange} />
+                  onUpdate={this._handleNameChange}
+                  value={this.state.candidateName} />
                 <Input placeholder="E-mail para contato (obrigatório)"
                   style={{color: '#ddd'}}
                   ref="candidateEmail"
-                  onUpdate={this._handleEmailChange} />
+                  onUpdate={this._handleEmailChange}
+                  value={this.state.candidateEmail} />
               </div>
             </div>
           </div>
@@ -196,7 +198,12 @@ var Registration = React.createClass({
     } else {
       var params = {name: name, email: email, skills: _buildSkillsArray(this.state.scores)};
       requester.new('post', 'candidates', params).then(function(response) {
-
+        console.log('Tudo certo %o', response);
+        humane.log('Seus dados foram enviados com sucesso, em breve entraremos em contato');
+        this._resetForm();
+      }.bind(this)).catch(function (response) {
+        console.log('Erro no servidor remoto %o', response);
+        humane.log('Desculpe-nos mas parece que nossos servidores estão com problemas :(');
       });
     }
   },
@@ -213,6 +220,14 @@ var Registration = React.createClass({
     var _scores = this.state.scores;
     _scores[e.target.dataset.skill] = e.target.value;
     this.setState({scores: _scores});
+  },
+
+  _resetForm: function() {
+    this.setState({
+      candidateName: '',
+      candidateEmail: '',
+      scores: {html: 0, css: 0, js: 0, python: 0, django: 0, ios: 0, android: 0}
+    });
   }
 });
 
