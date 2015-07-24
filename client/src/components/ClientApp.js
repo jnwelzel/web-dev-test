@@ -3,7 +3,8 @@
 var React = require('react/addons');
 var ReactTransitionGroup = React.addons.TransitionGroup;
 var Header = require('./Header');
-var Content = require('./Content');
+var RouteHandler = require('react-router').RouteHandler;
+var Footer = require('./Footer');
 
 // CSS
 require('normalize.css');
@@ -17,7 +18,8 @@ var ClientApp = React.createClass({
       <div className="main">
         <ReactTransitionGroup transitionName="fade">
           <Header/>
-          <Content/>
+          <RouteHandler/>
+          <Footer/>
         </ReactTransitionGroup>
       </div>
     );

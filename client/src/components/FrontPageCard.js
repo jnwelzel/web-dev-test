@@ -9,7 +9,6 @@ belle.style.card.style = {
   padding: 20,
   borderRadius: 2,
   color: '#FFF',
-  background: '#5FB1CF',
   boxShadow: '0 1px 1px rgba(0, 0, 0, 0.2)',
   boxSizing: 'border-box'
 };
@@ -17,15 +16,13 @@ belle.style.card.style = {
 
 require('styles/FrontPageCard.scss');
 
-var imageURL = require('../images/yeoman.png');
-
 var FrontPageCard = React.createClass({
 
   render: function () {
     return (
       <div className="FrontPageCard">
-        <Card className="clearfix">
-          <img className="card-icon" src={imageURL} />
+        <Card className="clearfix" style={{background: this.props.background}}>
+          <img className="card-icon" src={'images/' + this.props.image + '.png'} />
           <p className="title">{this.props.title}</p>
           <p>{this.props.content}</p>
         </Card>
