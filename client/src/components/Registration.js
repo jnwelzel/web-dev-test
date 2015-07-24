@@ -5,9 +5,45 @@ var belle = require('belle');
 var Input = belle.TextInput;
 var Button = belle.Button;
 var Navigation = require('react-router').Navigation;
+var requester = require('scripts/requester');
+var humane = require('humane-js');
 
 
 require('styles/Registration.scss');
+require('styles/humane.css');
+
+function _validateEmail(email) {
+  var validator = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+  return validator.test(email);
+}
+
+function _validateFields(name, email) {
+  var errors = [];
+  if(name === null || name.length === 0) {
+    errors.push('O campo \'Nome\' é obrigatório');
+  } else if(name.length < 3) {
+    errors.push('O campo \'Nome\' deve possuir no mínimo 3 caracteres');
+  }
+  if(email === null || email.length === 0) {
+    errors.push('O campo \'email\' é obrigatório');
+  } else if(!_validateEmail(email)) {
+    errors.push('O email informado é inválido');
+  }
+  return errors;
+}
+
+function _buildSkillsArray(scoresObj) {
+  var skills = [];
+  skills.push({description: 'HTML', score: scoresObj.html, skillGroup: 'FRONTEND'});
+  skills.push({description: 'CSS', score: scoresObj.css, skillGroup: 'FRONTEND'});
+  skills.push({description: 'Javascript', score: scoresObj.js, skillGroup: 'FRONTEND'});
+  skills.push({description: 'Python', score: scoresObj.python, skillGroup: 'BACKEND'});
+  skills.push({description: 'Django', score: scoresObj.django, skillGroup: 'BACKEND'});
+  skills.push({description: 'Desenvolvimento iOS', score: scoresObj.ios, skillGroup: 'MOBILE'});
+  skills.push({description: 'Desenvolvimento Android', score: scoresObj.android, skillGroup: 'MOBILE'});
+  return skills;
+}
+
 
 var Registration = React.createClass({
 
@@ -151,7 +187,18 @@ var Registration = React.createClass({
   },
 
   _submitForm: function() {
-    console.log('this.state.candidateName %s', this.state.candidateName);
+    // console.log('this.state.candidateName %s', this.state.candidateName);
+    var name = this.state.candidateName.trim();
+    var email = this.state.candidateEmail.trim();
+    var errors = _validateFields(name, email);
+    if(errors.length > 0) {
+      humane.log(errors);
+    } else {
+      var params = {name: name, email: email, skills: _buildSkillsArray(this.state.scores)};
+      requester.new('post', 'candidates', params).then(function(response) {
+
+      });
+    }
   },
 
   _handleNameChange: function(e) {
