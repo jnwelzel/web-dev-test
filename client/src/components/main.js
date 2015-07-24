@@ -15,6 +15,7 @@ var Routes = (
   <Route handler={ClientApp}>
     <DefaultRoute handler={Content}/>
     <Route name="registration" handler={Registration}/>
+    <Route name="/" handler={Content}/>
   </Route>
 );
 

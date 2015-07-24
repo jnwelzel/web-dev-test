@@ -1,55 +1,93 @@
+::-webkit-input-placeholder { /* WebKit browsers */
+  color: #b6b6b6;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  color: #b6b6b6;
+  opacity: 1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color: #b6b6b6;
+  opacity: 1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+  color: #b6b6b6;
+}
+
 .Registration {
 
 }
 
 .Registration h1 {
-    text-align: center;
-}
-
-.Registration .subtitle {
-    display: block;
-    text-align: center;
-    color: #969696;
-    margin-top: -20px;
-}
-
-.Registration fieldset {
-    border: none;
-    margin-top: 40px;
-}
-
-.Registration legend {
-    font-size: 18px;
+  text-align: center;
 }
 
 .Registration label {
-    color: gray;
-    font-size: 15px;
-    display: block;
+  display: block;
+}
+
+.Registration .subtitle {
+  display: block;
+  text-align: center;
+  color: #969696;
+  margin-top: -20px;
 }
 
 .Registration .buttons-holder {
-    display: block;
-    padding: 40px 0;
-    text-align: center;
+  display: block;
+  padding: 40px 0;
+  text-align: center;
 }
 
 .Registration .buttons-holder button {
-    margin-left: 20px;
+  margin-left: 20px;
+}
+
+.Registration .form-card {
+  margin: 20px 20px 0;
+  border-radius: 2px;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  padding: 15px;
+}
+
+.Registration .form-card label {
+  color: #e6e6e6;
+}
+
+.Registration .form-card input[type="range"] {
+  width: 100%;
+}
+
+.Registration .form-card img {
+  width: 120px;
+  height: 120px;
+}
+
+.Registration .form-card textarea {
+  color: #ddd;
+}
+
+.Registration .form-card .img-holder {
+  text-align: center;
+}
+
+.Registration .form-card .card-title {
+  color: #fff;
+  font-weight: bold;
 }
 
 .Registration .form-card.frontend {
-    background: #5FB1CF;
+  background: #5FB1CF;
 }
 
 .Registration .form-card.backend {
-    background: #61BD89;
+  background: #61BD89;
 }
 
 .Registration .form-card.mobile {
-    background: #D7914C;
+  background: #D7914C;
 }
 
 .Registration .form-card.personal {
-    background: #A66EBA;
+  background: #A66EBA;
 }
