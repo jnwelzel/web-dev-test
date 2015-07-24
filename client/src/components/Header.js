@@ -13,7 +13,7 @@ var Header = React.createClass({
         <div className="grid grid-pad">
           <div className="col-1-1">
             <div className="content">
-              Cadastro de Candidatos
+              <a href="/#">Cadastro de Candidatos</a>
               <a className="source" href="https://github.com/jnwelzel/web-dev-test" target="_blank">GitHub</a>
             </div>
           </div>

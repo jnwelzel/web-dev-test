@@ -1,3 +1,55 @@
 .Registration {
-  border: 1px dashed #f00;
+
+}
+
+.Registration h1 {
+    text-align: center;
+}
+
+.Registration .subtitle {
+    display: block;
+    text-align: center;
+    color: #969696;
+    margin-top: -20px;
+}
+
+.Registration fieldset {
+    border: none;
+    margin-top: 40px;
+}
+
+.Registration legend {
+    font-size: 18px;
+}
+
+.Registration label {
+    color: gray;
+    font-size: 15px;
+    display: block;
+}
+
+.Registration .buttons-holder {
+    display: block;
+    padding: 40px 0;
+    text-align: center;
+}
+
+.Registration .buttons-holder button {
+    margin-left: 20px;
+}
+
+.Registration .form-card.frontend {
+    background: #5FB1CF;
+}
+
+.Registration .form-card.backend {
+    background: #61BD89;
+}
+
+.Registration .form-card.mobile {
+    background: #D7914C;
+}
+
+.Registration .form-card.personal {
+    background: #A66EBA;
 }
