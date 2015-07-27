@@ -1,0 +1,55 @@
+{
+  "name":"",
+  "email":"jnwelzel@gmail.com",
+  "skills":[
+    {
+      "description":"HTML",
+      "dateCreated": 1437668626665,
+      "dateUpdated": 1437668626665,
+      "score":8,
+      "skillGroup":"FRONTEND"
+    },
+    {
+      "description":"CSS",
+      "dateCreated": 1437668626665,
+      "dateUpdated": 1437668626665,
+      "score":8,
+      "skillGroup":"FRONTEND"
+    },
+    {
+      "description":"Javascript",
+      "dateCreated": 1437668626665,
+      "dateUpdated": 1437668626665,
+      "score":8,
+      "skillGroup":"FRONTEND"
+    },
+    {
+      "description":"Python",
+      "dateCreated": 1437668626665,
+      "dateUpdated": 1437668626665,
+      "score":2,
+      "skillGroup":"BACKEND"
+    },
+    {
+      "description":"Django",
+      "dateCreated": 1437668626665,
+      "dateUpdated": 1437668626665,
+      "score":0,
+      "skillGroup":"BACKEND"
+    },
+    {
+      "description":"Desenvolvimento iOS",
+      "dateCreated": 1437668626665,
+      "dateUpdated": 1437668626665,
+      "score":0,
+      "skillGroup":"MOBILE"
+    },
+    {
+      "description":"Desenvolvimento Android",
+      "dateCreated": 1437668626665,
+      "dateUpdated": 1437668626665,
+      "score":6,
+      "skillGroup":"MOBILE"
+    }
+  ]
+}

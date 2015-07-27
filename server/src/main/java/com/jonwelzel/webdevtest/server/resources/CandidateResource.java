@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.jonwelzel.webdevtest.server.api.Candidate;
 import com.jonwelzel.webdevtest.server.core.services.CandidateServiceInterface;
 
+import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
@@ -24,7 +25,7 @@ public class CandidateResource {
     }
 
     @POST
-    public Candidate submitForm(Candidate candidate) {
+    public Candidate submitForm(@Valid Candidate candidate) {
         // curl -H "Content-Type: application/json" http://localhost:8080/candidates --data @candidate_me.json
         candidate = service.saveCandidate(candidate);
         return candidate;

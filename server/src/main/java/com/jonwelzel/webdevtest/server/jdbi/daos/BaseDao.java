@@ -1,6 +1,6 @@
 package com.jonwelzel.webdevtest.server.jdbi.daos;
 
-import com.jonwelzel.webdevtest.server.jdbi.BaseBean;
+import com.jonwelzel.webdevtest.server.api.BaseBean;
 
 import java.util.List;
 

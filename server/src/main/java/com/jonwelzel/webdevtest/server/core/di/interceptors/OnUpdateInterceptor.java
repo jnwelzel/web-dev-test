@@ -1,6 +1,6 @@
 package com.jonwelzel.webdevtest.server.core.di.interceptors;
 
-import com.jonwelzel.webdevtest.server.jdbi.BaseBean;
+import com.jonwelzel.webdevtest.server.api.BaseBean;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 

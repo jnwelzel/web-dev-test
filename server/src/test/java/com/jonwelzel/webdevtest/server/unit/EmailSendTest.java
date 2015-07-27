@@ -1,6 +1,6 @@
 package com.jonwelzel.webdevtest.server.unit;
 
-import com.jonwelzel.webdevtest.server.concurrent.EmailThread;
+import com.jonwelzel.webdevtest.server.core.concurrent.EmailThread;
 import com.jonwelzel.webdevtest.server.api.EmailFrontend;
 import com.jonwelzel.webdevtest.server.api.EmailInterface;
 import com.jonwelzel.webdevtest.server.core.utils.EnvVarsUtils;

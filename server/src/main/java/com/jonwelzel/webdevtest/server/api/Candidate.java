@@ -1,7 +1,10 @@
 package com.jonwelzel.webdevtest.server.api;
 
-import com.jonwelzel.webdevtest.server.jdbi.BaseBean;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,10 +14,25 @@ import java.util.List;
  */
 public class Candidate implements BaseBean {
 
+    @JsonProperty
+    @Size(min = 3)
+    @NotEmpty
     private String name;
+
+    @JsonProperty
+    @Email
+    @NotEmpty
     private String email;
+
+    @JsonProperty
+    @NotEmpty
+    @Size(min = 7, max = 7)
     private List<Skill> skills;
+
+    @JsonProperty
     private Date dateCreated;
+
+    @JsonProperty
     private Date dateUpdated;
 
     public Candidate() {

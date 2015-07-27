@@ -22,7 +22,7 @@ public class EnvVarsUtils {
                     "\"" + EMAIL_PWD + "\" devem ser definidas";
             throw new IllegalArgumentException(errMsg);
         }
-
+        log.info("Env vars health is good");
         return true;
     }
 

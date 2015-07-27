@@ -1,4 +1,4 @@
-package com.jonwelzel.webdevtest.server.concurrent;
+package com.jonwelzel.webdevtest.server.core.concurrent;
 
 import com.jonwelzel.webdevtest.server.api.EmailInterface;
 import com.jonwelzel.webdevtest.server.core.utils.EnvVarsUtils;

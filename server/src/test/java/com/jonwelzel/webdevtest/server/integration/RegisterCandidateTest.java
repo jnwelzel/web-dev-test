@@ -31,6 +31,7 @@ public class RegisterCandidateTest {
     @Before
     public void setUp() throws Exception {
         client = ClientBuilder.newClient();
+
     }
 
     @After
@@ -52,5 +53,17 @@ public class RegisterCandidateTest {
 
         assertThat(newCandidate.getDateCreated()).isNotNull();
         assertThat(newCandidate.getDateUpdated()).isNotNull();
+    }
+
+    @Test
+    public void shouldFailWithInvalidCandidate() {
+        final Candidate invalidCandidate = JsonHelper.readFixture("candidate_invalid.json", Candidate.class);
+
+        final Integer responseStatus = client.target("http://localhost:" + RULE.getLocalPort() + "/candidates")
+                .request()
+                .post(Entity.entity(invalidCandidate, MediaType.APPLICATION_JSON_TYPE))
+                .getStatus();
+
+        assertThat(responseStatus).isEqualTo(422); // Unprocessable entity
     }
 }

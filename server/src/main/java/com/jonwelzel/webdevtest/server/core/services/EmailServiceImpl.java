@@ -1,6 +1,6 @@
 package com.jonwelzel.webdevtest.server.core.services;
 
-import com.jonwelzel.webdevtest.server.concurrent.EmailThread;
+import com.jonwelzel.webdevtest.server.core.concurrent.EmailThread;
 import com.jonwelzel.webdevtest.server.api.Candidate;
 import com.jonwelzel.webdevtest.server.api.EmailFactory;
 import com.jonwelzel.webdevtest.server.api.EmailInterface;

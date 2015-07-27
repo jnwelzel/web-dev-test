@@ -1,4 +1,4 @@
-package com.jonwelzel.webdevtest.server.jdbi;
+package com.jonwelzel.webdevtest.server.api;
 
 import java.io.Serializable;
 import java.util.Date;
