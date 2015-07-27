@@ -3,7 +3,7 @@ package com.jonwelzel.webdevtest.server.integration;
 import com.jonwelzel.webdevtest.server.WebDevTestApplication;
 import com.jonwelzel.webdevtest.server.WebDevTestConfiguration;
 import com.jonwelzel.webdevtest.server.helpers.JsonHelper;
-import com.jonwelzel.webdevtest.server.models.Candidate;
+import com.jonwelzel.webdevtest.server.api.Candidate;
 import io.dropwizard.testing.junit.DropwizardAppRule;
 import org.junit.After;
 import org.junit.Before;

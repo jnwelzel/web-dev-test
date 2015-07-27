@@ -3,10 +3,10 @@ package com.jonwelzel.webdevtest.server.unit;
 import com.carlosbecker.guice.GuiceModules;
 import com.carlosbecker.guice.GuiceTestRunner;
 import com.google.inject.Inject;
-import com.jonwelzel.webdevtest.server.di.ApplicationModule;
-import com.jonwelzel.webdevtest.server.persistence.InMemoryStore;
-import com.jonwelzel.webdevtest.server.services.EmailServiceImpl;
-import com.jonwelzel.webdevtest.server.services.EmailServiceInterface;
+import com.jonwelzel.webdevtest.server.core.di.ApplicationModule;
+import com.jonwelzel.webdevtest.server.jdbi.InMemoryStore;
+import com.jonwelzel.webdevtest.server.core.services.EmailServiceImpl;
+import com.jonwelzel.webdevtest.server.core.services.EmailServiceInterface;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

@@ -1,7 +1,7 @@
 package com.jonwelzel.webdevtest.server.concurrent;
 
-import com.jonwelzel.webdevtest.server.models.EmailInterface;
-import com.jonwelzel.webdevtest.server.utils.EnvVarsUtils;
+import com.jonwelzel.webdevtest.server.api.EmailInterface;
+import com.jonwelzel.webdevtest.server.core.utils.EnvVarsUtils;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;

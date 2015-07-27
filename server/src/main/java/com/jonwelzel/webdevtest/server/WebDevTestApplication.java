@@ -1,8 +1,9 @@
 package com.jonwelzel.webdevtest.server;
 
 import com.hubspot.dropwizard.guice.GuiceBundle;
-import com.jonwelzel.webdevtest.server.di.ApplicationModule;
-import com.jonwelzel.webdevtest.server.utils.EnvVarsUtils;
+import com.jonwelzel.webdevtest.server.core.di.ApplicationModule;
+import com.jonwelzel.webdevtest.server.core.utils.EnvVarsUtils;
+import com.jonwelzel.webdevtest.server.health.EnvironmentVarsCheck;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -37,20 +38,17 @@ public class WebDevTestApplication extends Application<WebDevTestConfiguration> 
                 .setConfigClass(WebDevTestConfiguration.class)
                 .build();
         bootstrap.addBundle(guiceBundle);
-
-//        bootstrap.setConfigurationSourceProvider(
-//                new SubstitutingSourceProvider(bootstrap.getConfigurationSourceProvider(),
-//                        new EnvironmentVariableSubstitutor(false)
-//                )
-//        );
-
     }
 
     @Override
     public void run(WebDevTestConfiguration webDevTestConfiguration, Environment environment) throws Exception {
+        addCorsFilter(environment);
+        environment.healthChecks().register("env vars", new EnvironmentVarsCheck());
+    }
+
+    private void addCorsFilter(Environment environment) {
         FilterRegistration.Dynamic filter = environment.servlets().addFilter("CORS",
                 CrossOriginFilter.class);
-        // Add URL mapping
         filter.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
         filter.setInitParameter(CrossOriginFilter.ALLOWED_METHODS_PARAM, "GET,PUT,POST,DELETE,OPTIONS");
         filter.setInitParameter(CrossOriginFilter.ALLOWED_ORIGINS_PARAM, "*");

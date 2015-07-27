@@ -1,10 +1,10 @@
 package com.jonwelzel.webdevtest.server.unit;
 
 import com.jonwelzel.webdevtest.server.helpers.JsonHelper;
-import com.jonwelzel.webdevtest.server.models.Candidate;
-import com.jonwelzel.webdevtest.server.models.EmailType;
-import com.jonwelzel.webdevtest.server.models.SkillGroup;
-import com.jonwelzel.webdevtest.server.services.EmailServiceImpl;
+import com.jonwelzel.webdevtest.server.api.Candidate;
+import com.jonwelzel.webdevtest.server.api.EmailType;
+import com.jonwelzel.webdevtest.server.api.SkillGroup;
+import com.jonwelzel.webdevtest.server.core.services.EmailServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 

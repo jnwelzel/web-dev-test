@@ -1,8 +1,8 @@
 package com.jonwelzel.webdevtest.server.resources;
 
 import com.google.inject.Inject;
-import com.jonwelzel.webdevtest.server.models.Skill;
-import com.jonwelzel.webdevtest.server.services.SkillServiceInterface;
+import com.jonwelzel.webdevtest.server.api.Skill;
+import com.jonwelzel.webdevtest.server.core.services.SkillServiceInterface;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;

@@ -1,8 +1,8 @@
 package com.jonwelzel.webdevtest.server.resources;
 
 import com.google.inject.Inject;
-import com.jonwelzel.webdevtest.server.models.Candidate;
-import com.jonwelzel.webdevtest.server.services.CandidateServiceInterface;
+import com.jonwelzel.webdevtest.server.api.Candidate;
+import com.jonwelzel.webdevtest.server.core.services.CandidateServiceInterface;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
