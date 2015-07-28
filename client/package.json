@@ -13,6 +13,7 @@
     "axios": "^0.5.4",
     "belle": "^1.0.2",
     "events": "^1.0.2",
+    "colors.css": "^2.3.0",
     "flux": "^2.0.1",
     "humane-js": "^3.2.2",
     "keymirror": "^0.1.1",

@@ -1,3 +1,5 @@
+@import "~colors.css/sass/colors";
+
 .FrontPageCard {
 
 }
@@ -11,4 +13,16 @@
   margin-right: 20px;
   height: 120px;
   width: 120px;
+}
+
+.blue {
+  background-color: $blue;
+}
+
+.green {
+  background-color: $green;
+}
+
+.orange {
+  background-color: $orange;
 }

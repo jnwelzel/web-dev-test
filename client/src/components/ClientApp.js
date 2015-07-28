@@ -9,8 +9,9 @@ var belle = require('belle');
 
 // CSS
 require('normalize.css');
-require('../styles/main.css');
-require('../styles/simplegrid.css');
+require('styles/main.css');
+require('styles/simplegrid.css');
+
 
 belle.style.card.style = {
   marginTop: 40,
