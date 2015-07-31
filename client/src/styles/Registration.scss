@@ -1,3 +1,5 @@
+@import "./colors";
+
 ::-webkit-input-placeholder { /* WebKit browsers */
   color: #b6b6b6;
 }
@@ -77,17 +79,17 @@
 }
 
 .Registration .form-card.frontend {
-  background: #5FB1CF;
+  background: $blue;
 }
 
 .Registration .form-card.backend {
-  background: #61BD89;
+  background: $green;
 }
 
 .Registration .form-card.mobile {
-  background: #D7914C;
+  background: $orange;
 }
 
 .Registration .form-card.personal {
-  background: #A66EBA;
+  background: $purple;
 }

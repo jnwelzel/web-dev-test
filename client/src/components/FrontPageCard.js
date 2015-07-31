@@ -12,7 +12,7 @@ var FrontPageCard = React.createClass({
   render: function () {
     return (
       <div className="FrontPageCard">
-        <Card className="clearfix" style={{background: this.props.background}}>
+        <Card className={this.props.image + ' clearfix'}>
           <img className="card-icon" src={'images/' + this.props.image + '.png'} />
           <p className="title">{this.props.title}</p>
           <p>{this.props.content}</p>

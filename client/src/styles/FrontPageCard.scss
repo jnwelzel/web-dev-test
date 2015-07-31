@@ -1,5 +1,15 @@
-.FrontPageCard {
+@import "./colors";
 
+.FrontPageCard .frontend {
+  background: $blue;
+}
+
+.FrontPageCard .backend {
+  background: $green;
+}
+
+.FrontPageCard .mobile {
+  background: $orange;
 }
 
 .FrontPageCard .title {
