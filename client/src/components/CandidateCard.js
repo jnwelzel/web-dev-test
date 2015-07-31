@@ -10,7 +10,7 @@ var CandidateCard = React.createClass({
   render: function () {
     return (
       <div className="CandidateCard">
-        <div className="grid grid-pad">
+        <div className="grid">
           <div className="col-3-12">
             <span>{this.props.name}</span>
           </div>
