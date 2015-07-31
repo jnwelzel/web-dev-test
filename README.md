@@ -5,6 +5,7 @@ This app will let you fill out a form informing your skill level in seven differ
 The project is split in two different apps or parts: server and client. In order to get it running you must follow the instructions below:
 
 ###Server
+Warning: if you want to run it directly from inside the IDE (for easy debugging for example) don't forget to set up the environment vars IN the IDE.
 * Depends on: Maven v3+, Java SDK v1.7+
 * Make sure you have both these env vars declared: `WEB_DEV_TEST_EMAIL_ADDR` and `WEB_DEV_TEST_EMAIL_PWD`, which must contain a Gmail account name (ONLY the part before the @gmail.com) and the account password respectively
 * Clone the repo, `cd` into the `server` dir (where the `pom.xml` file is), run `mvn package` (this will also run all the unit and integration tests)
