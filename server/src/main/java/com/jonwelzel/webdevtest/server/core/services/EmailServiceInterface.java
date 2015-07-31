@@ -16,6 +16,5 @@ public interface EmailServiceInterface {
     void sendRegistrationEmails(Candidate candidate);
     List<EmailInterface> getEmailsForTypes(List<EmailType> emailTypes, String candidateEmail);
     List<EmailType> getEmailTypesToSend(Candidate candidate);
-    Integer calculateGroupScore(List<Skill> skills);
 
 }

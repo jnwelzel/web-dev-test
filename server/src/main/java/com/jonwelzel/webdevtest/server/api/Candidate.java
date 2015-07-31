@@ -14,6 +14,8 @@ import java.util.List;
  */
 public class Candidate implements BaseBean {
 
+    private static final Integer MINIMUM_SCORE = 7;
+
     @JsonProperty
     @Size(min = 3)
     @NotEmpty
@@ -95,6 +97,31 @@ public class Candidate implements BaseBean {
         for(Skill skill : skills) {
             if(skill.getSkillGroup().equals(group)) {
                 result.add(skill);
+            }
+        }
+        return result;
+    }
+
+    @JsonProperty
+    public boolean isFrontend() {
+        return calculateGroupScore(getSkillsByGroup(SkillGroup.FRONTEND)) == 3;
+    }
+
+    @JsonProperty
+    public boolean isBackend() {
+        return calculateGroupScore(getSkillsByGroup(SkillGroup.FRONTEND)) == 2;
+    }
+
+    @JsonProperty
+    public boolean isMobile() {
+        return calculateGroupScore(getSkillsByGroup(SkillGroup.FRONTEND)) >= 1;
+    }
+
+    private Integer calculateGroupScore(List<Skill> skills) {
+        Integer result = 0;
+        for(Skill skill : skills) {
+            if(skill.getScore() >= MINIMUM_SCORE) {
+                result++;
             }
         }
         return result;

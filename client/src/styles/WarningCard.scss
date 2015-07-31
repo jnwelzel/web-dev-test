@@ -1,0 +1,13 @@
+@import "./colors";
+
+.WarningCard {
+  color: $darkYellow;
+  text-align: center;
+  width: 100%;
+  font-size: 14px;
+}
+
+.WarningCard .card {
+  background: $lightYellow;
+  border: 1px solid $yellow;
+}

@@ -1,12 +1,10 @@
 package com.jonwelzel.webdevtest.server.core.services;
 
-import com.jonwelzel.webdevtest.server.core.concurrent.EmailThread;
 import com.jonwelzel.webdevtest.server.api.Candidate;
 import com.jonwelzel.webdevtest.server.api.EmailFactory;
 import com.jonwelzel.webdevtest.server.api.EmailInterface;
 import com.jonwelzel.webdevtest.server.api.EmailType;
-import com.jonwelzel.webdevtest.server.api.Skill;
-import com.jonwelzel.webdevtest.server.api.SkillGroup;
+import com.jonwelzel.webdevtest.server.core.concurrent.EmailThread;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +17,6 @@ import java.util.List;
 public class EmailServiceImpl implements EmailServiceInterface {
 
     private static final Logger log = LoggerFactory.getLogger(EmailServiceImpl.class.getName());
-    private static final Integer MINIMUM_SCORE = 7;
 
     @Override
     public void sendEmail(EmailInterface email) {
@@ -58,30 +55,19 @@ public class EmailServiceImpl implements EmailServiceInterface {
         }
 
         List<EmailType> types = new ArrayList<>();
-        if(calculateGroupScore(candidate.getSkillsByGroup(SkillGroup.FRONTEND)) == 3) {
+        if(candidate.isFrontend()) {
             types.add(EmailType.FRONTEND);
         }
-        if(calculateGroupScore(candidate.getSkillsByGroup(SkillGroup.BACKEND)) == 2) {
+        if(candidate.isBackend()) {
             types.add(EmailType.BACKEND);
         }
-        if(calculateGroupScore(candidate.getSkillsByGroup(SkillGroup.MOBILE)) >= 1) {
+        if(candidate.isMobile()) {
             types.add(EmailType.MOBILE);
         }
         if(types.isEmpty()) {
             types.add(EmailType.GENERIC);
         }
         return types;
-    }
-
-    @Override
-    public Integer calculateGroupScore(List<Skill> skills) {
-        Integer result = 0;
-        for(Skill skill : skills) {
-            if(skill.getScore() >= MINIMUM_SCORE) {
-                result++;
-            }
-        }
-        return result;
     }
 
 }

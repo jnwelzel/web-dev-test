@@ -39,18 +39,18 @@ public class EmailServiceTest {
     }
 
     @Test
-    public void shouldHaveScore2ForMobile() {
-        assertThat(emailService.calculateGroupScore(candidate.getSkillsByGroup(SkillGroup.MOBILE))).isEqualTo(2);
+    public void shouldHaveScoreForMobile() {
+        assertThat(candidate.isMobile()).isTrue();
     }
 
     @Test
-    public void shouldHaveScore3ForFrontend() {
-        assertThat(emailService.calculateGroupScore(candidate.getSkillsByGroup(SkillGroup.FRONTEND))).isEqualTo(3);
+    public void shouldHaveScoreForFrontend() {
+        assertThat(candidate.isFrontend()).isTrue();
     }
 
     @Test
-    public void shouldHaveScore2ForBackend() {
-        assertThat(emailService.calculateGroupScore(candidate.getSkillsByGroup(SkillGroup.BACKEND))).isEqualTo(2);
+    public void shouldHaveScoreForBackend() {
+        assertThat(candidate.isBackend()).isTrue();
     }
 
 }

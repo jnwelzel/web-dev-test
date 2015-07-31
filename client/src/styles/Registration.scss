@@ -21,17 +21,18 @@
 
 .Registration h1 {
   text-align: center;
-}
-
-.Registration label {
-  display: block;
+  color: $black;
 }
 
 .Registration .subtitle {
   display: block;
   text-align: center;
-  color: #969696;
+  color: $lightGray;
   margin-top: -20px;
+}
+
+.Registration label {
+  display: block;
 }
 
 .Registration .buttons-holder {
