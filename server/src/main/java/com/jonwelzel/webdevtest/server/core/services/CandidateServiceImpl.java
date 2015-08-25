@@ -3,6 +3,7 @@ package com.jonwelzel.webdevtest.server.core.services;
 import com.google.inject.Inject;
 import com.jonwelzel.webdevtest.server.core.di.binding.MockDao;
 import com.jonwelzel.webdevtest.server.api.Candidate;
+import com.jonwelzel.webdevtest.server.core.utils.StringUtils;
 import com.jonwelzel.webdevtest.server.jdbi.daos.CandidateDaoInterface;
 
 import java.util.List;
@@ -32,4 +33,15 @@ public class CandidateServiceImpl implements CandidateServiceInterface {
     public List<Candidate> getAllCandidates() {
         return dao.findAll();
     }
+
+    @Override
+    public List<Candidate> getAllCandidatesMasked() {
+        List<Candidate> all = dao.findAll();
+        for(Candidate c : all) {
+            c.setName(StringUtils.maskName(c.getName()));
+            c.setEmail(StringUtils.maskEmail(c.getEmail()));
+        }
+        return all;
+    }
+
 }

@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react/addons');
+var Link = require('react-router').Link;
 
 
 require('styles/Header.scss');
@@ -14,7 +15,7 @@ var Header = React.createClass({
           <div className="col-1-1">
             <div className="content">
               <a href="/#">Cadastro de Candidatos</a>
-              <a className="source" href="https://github.com/jnwelzel/web-dev-test" target="_blank">GitHub</a>
+              <Link to="candidates" className="right">Candidatos</Link>
             </div>
           </div>
         </div>

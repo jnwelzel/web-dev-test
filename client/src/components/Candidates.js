@@ -61,7 +61,7 @@ var Candidates = React.createClass({
   },
 
   componentDidMount: function() {
-    requester.new('get', 'candidates').then(function(resp) {
+    requester.new('get', 'candidates/list-masked').then(function(resp) {
       this.setState({candidates: resp.data});
     }.bind(this)).catch(function (response) {
       console.log('Erro no servidor remoto %o', response);

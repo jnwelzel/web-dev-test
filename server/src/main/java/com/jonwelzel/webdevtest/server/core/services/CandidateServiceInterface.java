@@ -11,5 +11,6 @@ public interface CandidateServiceInterface {
 
     Candidate saveCandidate(Candidate candidate);
     List<Candidate> getAllCandidates();
+    List<Candidate> getAllCandidatesMasked();
 
 }

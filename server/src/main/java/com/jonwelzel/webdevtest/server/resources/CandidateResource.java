@@ -36,4 +36,10 @@ public class CandidateResource {
         return service.getAllCandidates();
     }
 
+    @GET
+    @Path("list-masked")
+    public List<Candidate> listMasked() {
+        return service.getAllCandidatesMasked();
+    }
+
 }
