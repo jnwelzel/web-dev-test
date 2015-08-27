@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.jonwelzel.webdevtest.server.api.Candidate;
 import com.jonwelzel.webdevtest.server.core.services.CandidateServiceInterface;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -38,6 +39,7 @@ public class CandidateResource {
 
     @GET
     @Path("list-masked")
+    @RolesAllowed("ADMIN")
     public List<Candidate> listMasked() {
         return service.getAllCandidatesMasked();
     }

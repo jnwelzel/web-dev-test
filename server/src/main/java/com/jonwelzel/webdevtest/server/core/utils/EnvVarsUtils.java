@@ -37,4 +37,8 @@ public class EnvVarsUtils {
         return System.getenv(EMAIL_PWD);
     }
 
+    public static String getJwtSecret() {
+        return System.getenv(JWT_SECRET);
+    }
+
 }
