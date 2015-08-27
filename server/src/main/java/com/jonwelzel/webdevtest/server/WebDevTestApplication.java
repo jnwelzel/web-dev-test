@@ -8,6 +8,7 @@ import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.eclipse.jetty.servlets.CrossOriginFilter;
+import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.FilterRegistration;
@@ -44,6 +45,7 @@ public class WebDevTestApplication extends Application<WebDevTestConfiguration> 
     public void run(WebDevTestConfiguration webDevTestConfiguration, Environment environment) throws Exception {
         addCorsFilter(environment);
         environment.healthChecks().register("env vars", new EnvironmentVarsCheck());
+        environment.jersey().register(RolesAllowedDynamicFeature.class);
     }
 
     private void addCorsFilter(Environment environment) {

@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Size;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
 /**
  * Created by jwelzel on 22/07/15.
  */
-public class Candidate implements BaseBean {
+public class Candidate implements BaseBean, Principal {
 
     private static final Integer MINIMUM_SCORE = 7;
 
@@ -36,6 +37,9 @@ public class Candidate implements BaseBean {
 
     @JsonProperty
     private Date dateUpdated;
+
+    @JsonProperty
+    private AccountType accountType = AccountType.ANONYMOUS;
 
     public Candidate() {
     }
@@ -90,6 +94,14 @@ public class Candidate implements BaseBean {
 
     public void setSkills(List<Skill> skills) {
         this.skills = skills;
+    }
+
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
     }
 
     public List<Skill> getSkillsByGroup(SkillGroup group) {
