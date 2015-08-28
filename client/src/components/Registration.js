@@ -7,15 +7,11 @@ var Button = belle.Button;
 var Navigation = require('react-router').Navigation;
 var requester = require('scripts/requester');
 var humane = require('humane-js');
+var validations = require('scripts/validations');
 
 
 require('styles/Registration.scss');
 require('styles/humane.css');
-
-function _validateEmail(email) {
-  var validator = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-  return validator.test(email);
-}
 
 function _validateFields(name, email) {
   var errors = [];
@@ -25,9 +21,9 @@ function _validateFields(name, email) {
     errors.push('O campo \'Nome\' deve possuir no mínimo 3 caracteres');
   }
   if(email === null || email.length === 0) {
-    errors.push('O campo \'Email\' é obrigatório');
-  } else if(!_validateEmail(email)) {
-    errors.push('O email informado é inválido');
+    errors.push('O campo \'E-mail\' é obrigatório');
+  } else if(!validations.validateEmail(email)) {
+    errors.push('O e-mail informado é inválido');
   }
   return errors;
 }

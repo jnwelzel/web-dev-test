@@ -10,6 +10,7 @@ var DefaultRoute = Router.DefaultRoute;
 var Content = require('./Content');
 var Registration = require('./Registration');
 var Candidates = require('./Candidates');
+var Login = require('./Login');
 
 var content = document.getElementById('content');
 
@@ -18,6 +19,7 @@ var Routes = (
     <DefaultRoute handler={Content}/>
     <Route name="registration" handler={Registration}/>
     <Route name="candidates" handler={Candidates}/>
+    <Route name="login" handler={Login}/>
     <Route name="/" handler={Content}/>
   </Route>
 );
