@@ -6,4 +6,7 @@ import com.jonwelzel.webdevtest.server.api.Candidate;
  * Created by jwelzel on 22/07/15.
  */
 public interface CandidateDaoInterface extends BaseDao<Candidate> {
+
+    Candidate findByEmail(String email);
+
 }

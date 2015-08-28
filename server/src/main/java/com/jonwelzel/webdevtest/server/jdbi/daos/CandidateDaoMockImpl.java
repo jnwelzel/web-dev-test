@@ -52,4 +52,12 @@ public class CandidateDaoMockImpl implements CandidateDaoInterface {
         return null;
     }
 
+    @Override
+    public Candidate findByEmail(String email) {
+        for(Candidate c : store.getCandidates()) {
+            if(c.getEmail().equals(email))
+                return c;
+        }
+        return null;
+    }
 }

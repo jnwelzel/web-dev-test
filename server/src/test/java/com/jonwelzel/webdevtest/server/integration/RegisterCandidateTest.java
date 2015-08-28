@@ -31,7 +31,6 @@ public class RegisterCandidateTest {
     @Before
     public void setUp() throws Exception {
         client = ClientBuilder.newClient();
-
     }
 
     @After

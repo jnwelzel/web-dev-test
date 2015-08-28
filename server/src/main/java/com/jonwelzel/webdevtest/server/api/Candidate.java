@@ -41,6 +41,21 @@ public class Candidate implements BaseBean, Principal {
     @JsonProperty
     private AccountType accountType = AccountType.ANONYMOUS;
 
+    @JsonProperty
+    private String passwordHash;
+
+    @JsonProperty
+    private String token;
+
+    @JsonProperty
+    private boolean frontend;
+
+    @JsonProperty
+    private boolean backend;
+
+    @JsonProperty
+    private boolean mobile;
+
     public Candidate() {
     }
 
@@ -104,6 +119,22 @@ public class Candidate implements BaseBean, Principal {
         this.accountType = accountType;
     }
 
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     public List<Skill> getSkillsByGroup(SkillGroup group) {
         List<Skill> result = new ArrayList<>();
         for(Skill skill : skills) {
@@ -114,17 +145,17 @@ public class Candidate implements BaseBean, Principal {
         return result;
     }
 
-    @JsonProperty
+    @JsonProperty("frontend")
     public boolean isFrontend() {
         return calculateGroupScore(getSkillsByGroup(SkillGroup.FRONTEND)) == 3;
     }
 
-    @JsonProperty
+    @JsonProperty("backend")
     public boolean isBackend() {
         return calculateGroupScore(getSkillsByGroup(SkillGroup.FRONTEND)) == 2;
     }
 
-    @JsonProperty
+    @JsonProperty("mobile")
     public boolean isMobile() {
         return calculateGroupScore(getSkillsByGroup(SkillGroup.FRONTEND)) >= 1;
     }

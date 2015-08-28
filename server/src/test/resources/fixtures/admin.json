@@ -1,7 +1,8 @@
 {
-  "name":"Chuck Norris",
+  "name":"Admin",
   "email":"admin@admin.com",
   "passwordHash":"1000:ea270d69e9f07766c2d22a45fb49cbfb08980cd6c9f51604:e8fd91bd20c4a316383828d14aa7645716435396f6b38480",
+  "accountType":"ADMIN",
   "skills":[
     {
       "description":"HTML",
@@ -52,5 +53,5 @@
       "score":10,
       "skillGroup":"MOBILE"
     }
-  ] 
+  ]
 }
