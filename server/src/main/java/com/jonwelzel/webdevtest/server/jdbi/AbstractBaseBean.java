@@ -11,6 +11,7 @@ public abstract class AbstractBaseBean implements BaseBean {
 
     Date dateCreated;
     Date dateUpdated;
+    String id;
 
     @Override
     public Date getDateCreated() {
@@ -30,5 +31,15 @@ public abstract class AbstractBaseBean implements BaseBean {
     @Override
     public void setDateUpdated(Date dateUpdated) {
         this.dateUpdated = dateUpdated;
+    }
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(String id) {
+        this.id = id;
     }
 }

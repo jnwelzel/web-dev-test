@@ -70,7 +70,7 @@ var Login = React.createClass({
         // console.log('Erro no servidor remoto %o', response);
         switch (response.status) {
           case 404:
-            humane.log('Nenhum registro encontrado com o e-mail informado');
+            humane.log('Nenhum registro foi encontrado com o e-mail informado');
             break;
           case 403:
             humane.log('A senha informada é inválida');

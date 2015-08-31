@@ -2,14 +2,12 @@ package com.jonwelzel.webdevtest.server.core.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.inject.Inject;
-import com.jonwelzel.webdevtest.server.api.dtos.LoginDTO;
-import com.jonwelzel.webdevtest.server.core.di.binding.MockDao;
 import com.jonwelzel.webdevtest.server.api.Candidate;
+import com.jonwelzel.webdevtest.server.api.dtos.LoginDto;
+import com.jonwelzel.webdevtest.server.core.di.binding.MockDao;
 import com.jonwelzel.webdevtest.server.core.exceptions.web.InvalidPasswordException;
 import com.jonwelzel.webdevtest.server.core.exceptions.web.NotFoundByEmailException;
 import com.jonwelzel.webdevtest.server.core.security.PasswordHash;
-import com.jonwelzel.webdevtest.server.core.utils.EnvVarsUtils;
-import com.jonwelzel.webdevtest.server.core.utils.JwtUtils;
 import com.jonwelzel.webdevtest.server.core.utils.StringUtils;
 import com.jonwelzel.webdevtest.server.jdbi.daos.CandidateDaoInterface;
 import org.slf4j.Logger;
@@ -57,7 +55,7 @@ public class CandidateServiceImpl implements CandidateServiceInterface {
     }
 
     @Override
-    public Candidate authenticate(LoginDTO data) throws InvalidKeySpecException, NoSuchAlgorithmException, JsonProcessingException {
+    public Candidate authenticate(LoginDto data) throws InvalidKeySpecException, NoSuchAlgorithmException, JsonProcessingException {
         Candidate candidate = dao.findByEmail(data.getEmail());
         if (candidate == null)
             throw new NotFoundByEmailException(data.getEmail());
@@ -66,7 +64,7 @@ public class CandidateServiceImpl implements CandidateServiceInterface {
         if(!valid)
             throw new InvalidPasswordException();
 
-        candidate.setToken(JwtUtils.encode(EnvVarsUtils.getJwtSecret(), candidate));
+        log.info("\"" + data.getEmail() + "\" autenticado com sucesso");
         return candidate;
     }
 

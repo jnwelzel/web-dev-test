@@ -86,6 +86,13 @@
             </exclusions>
         </dependency>
 
+        <!-- REDIS DROPWIZARD BUNDLE -->
+        <dependency>
+            <groupId>com.bendb.dropwizard</groupId>
+            <artifactId>dropwizard-redis</artifactId>
+            <version>0.8.1-0</version>
+        </dependency>
+
         <!-- Tests for Guice -->
         <dependency>
             <groupId>com.carlosbecker</groupId>

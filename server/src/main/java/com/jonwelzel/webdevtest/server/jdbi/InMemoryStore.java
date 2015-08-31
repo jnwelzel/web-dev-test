@@ -52,6 +52,7 @@ public class InMemoryStore {
         admin.setEmail("admin@admin.com");
         admin.setPasswordHash("1000:ea270d69e9f07766c2d22a45fb49cbfb08980cd6c9f51604:e8fd91bd20c4a316383828d14aa7645716435396f6b38480");
         admin.setAccountType(AccountType.ADMIN);
+        admin.setId("934d49079d7bdc24c770dfc88b8a4e1f866bbcd1139523dc");
         admin.setDateCreated(new Date());
         admin.setDateUpdated(new Date());
         admin.setSkills(buildSkills());

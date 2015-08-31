@@ -44,4 +44,13 @@ public class PasswordTest {
         assertThat(validated).isFalse();
     }
 
+    @Test
+    public void shouldCreateTwoDifferentHashesOfSameSize() {
+        final String hash1 = PasswordHash.createSimpleHash();
+        final String hash2 = PasswordHash.createSimpleHash();
+
+        assertThat(hash1).isNotEqualTo(hash2);
+        assertThat(hash1).hasSameSizeAs(hash2);
+    }
+
 }

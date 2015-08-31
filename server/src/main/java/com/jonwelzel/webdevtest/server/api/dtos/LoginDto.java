@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 /**
  * Created by jwelzel on 27/08/15.
  */
-public class LoginDTO {
+public class LoginDto {
 
     @Email
     @NotEmpty
@@ -18,10 +18,10 @@ public class LoginDTO {
     @JsonProperty
     private String password;
 
-    public LoginDTO() {
+    public LoginDto() {
     }
 
-    public LoginDTO(String email, String password) {
+    public LoginDto(String email, String password) {
         this.email = email;
         this.password = password;
     }

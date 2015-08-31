@@ -1,6 +1,7 @@
 package com.jonwelzel.webdevtest.server.core.di.interceptors;
 
 import com.jonwelzel.webdevtest.server.api.BaseBean;
+import com.jonwelzel.webdevtest.server.core.security.PasswordHash;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 
@@ -16,6 +17,7 @@ public class OnSaveInterceptor implements MethodInterceptor {
         BaseBean bean = (BaseBean) invocation.getArguments()[0];
         bean.setDateCreated(new Date());
         bean.setDateUpdated(new Date());
+        bean.setId(PasswordHash.createSimpleHash());
         return invocation.proceed();
     }
 

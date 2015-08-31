@@ -8,6 +8,8 @@ import java.util.Date;
  */
 public interface BaseBean extends Serializable {
 
+    String getId();
+    void setId(String id);
     Date getDateCreated();
     Date getDateUpdated();
     void setDateCreated(Date date);

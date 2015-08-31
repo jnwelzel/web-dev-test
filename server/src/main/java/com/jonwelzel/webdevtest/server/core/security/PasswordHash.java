@@ -168,7 +168,7 @@ public class PasswordHash {
      * @param array the byte array to convert
      * @return a length*2 character string encoding the byte array
      */
-    private static String toHex(byte[] array) {
+    public static String toHex(byte[] array) {
         BigInteger bi = new BigInteger(1, array);
         String hex = bi.toString(16);
         int paddingLength = (array.length * 2) - hex.length();
@@ -176,6 +176,14 @@ public class PasswordHash {
             return String.format("%0" + paddingLength + "d", 0) + hex;
         else
             return hex;
+    }
+
+    public static String createSimpleHash() {
+        // Generate a random salt
+        SecureRandom random = new SecureRandom();
+        byte[] salt = new byte[SALT_BYTE_SIZE];
+        random.nextBytes(salt);
+        return toHex(salt);
     }
 
 }

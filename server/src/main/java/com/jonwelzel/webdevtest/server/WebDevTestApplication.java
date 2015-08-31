@@ -1,5 +1,8 @@
 package com.jonwelzel.webdevtest.server;
 
+import com.bendb.dropwizard.redis.JedisBundle;
+import com.bendb.dropwizard.redis.JedisFactory;
+import com.google.common.net.HostAndPort;
 import com.hubspot.dropwizard.guice.GuiceBundle;
 import com.jonwelzel.webdevtest.server.core.di.ApplicationModule;
 import com.jonwelzel.webdevtest.server.core.utils.EnvVarsUtils;
@@ -39,6 +42,13 @@ public class WebDevTestApplication extends Application<WebDevTestConfiguration> 
                 .setConfigClass(WebDevTestConfiguration.class)
                 .build();
         bootstrap.addBundle(guiceBundle);
+
+        bootstrap.addBundle(new JedisBundle<WebDevTestConfiguration>() {
+            @Override
+            public JedisFactory getJedisFactory(WebDevTestConfiguration configuration) {
+                return configuration.buildJedisFactory();
+            }
+        });
     }
 
     @Override

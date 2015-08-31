@@ -3,7 +3,8 @@ package com.jonwelzel.webdevtest.server.integration;
 import com.jonwelzel.webdevtest.server.WebDevTestApplication;
 import com.jonwelzel.webdevtest.server.WebDevTestConfiguration;
 import com.jonwelzel.webdevtest.server.api.Candidate;
-import com.jonwelzel.webdevtest.server.api.dtos.LoginDTO;
+import com.jonwelzel.webdevtest.server.api.dtos.LoginDto;
+import com.jonwelzel.webdevtest.server.api.dtos.LoginResponseDto;
 import com.jonwelzel.webdevtest.server.helpers.JsonHelper;
 import io.dropwizard.testing.junit.DropwizardAppRule;
 import org.junit.After;
@@ -42,27 +43,27 @@ public class SessionResourceTest {
     @Test
     public void shouldLoginAdmin() {
         final Candidate admin = JsonHelper.readFixture("admin.json", Candidate.class);
-        LoginDTO loginDTO = new LoginDTO("admin@admin.com", "Password@123");
+        LoginDto loginDto = new LoginDto("admin@admin.com", "Password@123");
 
         assertThat(admin).isNotNull();
 
-        final Candidate authAdmin = client.target("http://localhost:" + RULE.getLocalPort() + "/session/login")
+        final LoginResponseDto loginResponse = client.target("http://localhost:" + RULE.getLocalPort() + "/session/login")
                 .request()
-                .post(Entity.entity(loginDTO, MediaType.APPLICATION_JSON_TYPE))
-                .readEntity(Candidate.class);
+                .post(Entity.entity(loginDto, MediaType.APPLICATION_JSON_TYPE))
+                .readEntity(LoginResponseDto.class);
 
-        assertThat(authAdmin).isNotNull();
-        assertThat(authAdmin.getName()).isEqualTo(admin.getName());
-        assertThat(authAdmin.getToken()).isNotNull();
+        assertThat(loginResponse).isNotNull();
+        assertThat(loginResponse.getCandidate().getName()).isEqualTo(admin.getName());
+        assertThat(loginResponse.getJwt()).isNotNull();
     }
 
     @Test
     public void shouldNotLoginAdminWithInvalidPassword() {
-        LoginDTO loginDTO = new LoginDTO("admin@admin.com", "Password@123!");
+        LoginDto loginDto = new LoginDto("admin@admin.com", "Password@123!");
 
         final Integer status = client.target("http://localhost:" + RULE.getLocalPort() + "/session/login")
                 .request()
-                .post(Entity.entity(loginDTO, MediaType.APPLICATION_JSON_TYPE))
+                .post(Entity.entity(loginDto, MediaType.APPLICATION_JSON_TYPE))
                 .getStatus();
 
         assertThat(status).isNotNull();

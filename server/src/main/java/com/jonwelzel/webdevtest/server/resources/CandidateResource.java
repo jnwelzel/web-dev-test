@@ -3,10 +3,12 @@ package com.jonwelzel.webdevtest.server.resources;
 import com.google.inject.Inject;
 import com.jonwelzel.webdevtest.server.api.Candidate;
 import com.jonwelzel.webdevtest.server.core.services.CandidateServiceInterface;
+import redis.clients.jedis.JedisPool;
 
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -33,14 +35,15 @@ public class CandidateResource {
     }
 
     @GET
+    @RolesAllowed("ADMIN")
+    @Path("list-unmasked")
     public List<Candidate> list() {
         return service.getAllCandidates();
     }
 
     @GET
-    @Path("list-masked")
-    @RolesAllowed("ADMIN")
-    public List<Candidate> listMasked() {
+    public List<Candidate> listMasked(@Context JedisPool jedis) {
+        jedis.getResource().hget("test", "foo");
         return service.getAllCandidatesMasked();
     }
 

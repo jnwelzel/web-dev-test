@@ -1,6 +1,9 @@
 package com.jonwelzel.webdevtest.server.api;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.jonwelzel.webdevtest.server.jdbi.AbstractBaseBean;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -13,7 +16,8 @@ import java.util.List;
 /**
  * Created by jwelzel on 22/07/15.
  */
-public class Candidate implements BaseBean, Principal {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class Candidate extends AbstractBaseBean implements Principal {
 
     private static final Integer MINIMUM_SCORE = 7;
 
@@ -41,19 +45,16 @@ public class Candidate implements BaseBean, Principal {
     @JsonProperty
     private AccountType accountType = AccountType.ANONYMOUS;
 
-    @JsonProperty
+    @JsonIgnore
     private String passwordHash;
 
-    @JsonProperty
-    private String token;
-
-    @JsonProperty
+    @JsonIgnore
     private boolean frontend;
 
-    @JsonProperty
+    @JsonIgnore
     private boolean backend;
 
-    @JsonProperty
+    @JsonIgnore
     private boolean mobile;
 
     public Candidate() {
@@ -127,14 +128,6 @@ public class Candidate implements BaseBean, Principal {
         this.passwordHash = passwordHash;
     }
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
     public List<Skill> getSkillsByGroup(SkillGroup group) {
         List<Skill> result = new ArrayList<>();
         for(Skill skill : skills) {
@@ -152,12 +145,12 @@ public class Candidate implements BaseBean, Principal {
 
     @JsonProperty("backend")
     public boolean isBackend() {
-        return calculateGroupScore(getSkillsByGroup(SkillGroup.FRONTEND)) == 2;
+        return calculateGroupScore(getSkillsByGroup(SkillGroup.BACKEND)) == 2;
     }
 
     @JsonProperty("mobile")
     public boolean isMobile() {
-        return calculateGroupScore(getSkillsByGroup(SkillGroup.FRONTEND)) >= 1;
+        return calculateGroupScore(getSkillsByGroup(SkillGroup.MOBILE)) >= 1;
     }
 
     private Integer calculateGroupScore(List<Skill> skills) {
