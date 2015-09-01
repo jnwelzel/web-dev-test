@@ -9,8 +9,8 @@ import java.util.List;
  */
 public interface SessionServiceInterface {
 
-    UserSession newSession(String userId, String token);
+    UserSession newSession(String address, String agent, String userId);
     List<UserSession> userSessions(String userId);
-    UserSession findById(String userId, String token, String sessionId);
+    UserSession findById(String userId, String sessionId);
 
 }

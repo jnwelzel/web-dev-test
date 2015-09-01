@@ -14,6 +14,17 @@ public class UserSession extends AbstractBaseBean {
     private Date lastAccess;
     private String userId;
 
+    public UserSession() {
+    }
+
+    public UserSession(String beanId, String address, String agent, Date lastAccess, String userId) {
+        this.id = beanId;
+        this.address = address;
+        this.agent = agent;
+        this.lastAccess = lastAccess;
+        this.userId = userId;
+    }
+
     public String getAddress() {
         return address;
     }

@@ -9,9 +9,9 @@ import java.util.Date;
  */
 public abstract class AbstractBaseBean implements BaseBean {
 
-    Date dateCreated;
-    Date dateUpdated;
-    String id;
+    protected Date dateCreated;
+    protected Date dateUpdated;
+    protected String id;
 
     @Override
     public Date getDateCreated() {

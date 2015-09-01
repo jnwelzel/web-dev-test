@@ -6,8 +6,8 @@ The project is split in two different apps or parts: server and client. In order
 
 ###Server
 Warning: if you want to run it directly from inside the IDE (for easy debugging for example) don't forget to set up the environment vars IN the IDE.
-* Depends on: Maven v3+, Java SDK v1.7+
-* Make sure you have both these env vars declared: `WEB_DEV_TEST_EMAIL_ADDR` and `WEB_DEV_TEST_EMAIL_PWD`, which must contain a Gmail account name (ONLY the part before the @gmail.com) and the account password respectively
+* Depends on: Maven v3+, Java SDK v1.7+, Redis 2.8+
+* Make sure you have these env vars declared: `WEB_DEV_TEST_EMAIL_ADDR`, `WEB_DEV_TEST_EMAIL_PWD` and `WEB_DEV_TEST_JWT_SECRET`, which must contain a Gmail account name (ONLY the part before the @gmail.com), the account password and a hash for generating the JSON Web Token respectively
 * Clone the repo, `cd` into the `server` dir (where the `pom.xml` file is), run `mvn package` (this will also run all the unit and integration tests)
 * Finally start the server app by running `java -jar target/server-1.0.0-SNAPSHOT.jar server`
 * The server should now be running at [http://localhost:8080](http://localhost:8080)

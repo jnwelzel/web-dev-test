@@ -10,7 +10,7 @@ import java.util.List;
 public class SessionServiceImpl implements SessionServiceInterface {
 
     @Override
-    public UserSession newSession(String userId, String token) {
+    public UserSession newSession(String address, String agent, String userId) {
         return null;
     }
 
@@ -20,7 +20,7 @@ public class SessionServiceImpl implements SessionServiceInterface {
     }
 
     @Override
-    public UserSession findById(String userId, String token, String sessionId) {
+    public UserSession findById(String userId, String sessionId) {
         return null;
     }
 
