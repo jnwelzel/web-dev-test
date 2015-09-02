@@ -2,14 +2,11 @@ package com.jonwelzel.webdevtest.server.unit;
 
 import com.jonwelzel.webdevtest.server.api.UserSession;
 import com.jonwelzel.webdevtest.server.helpers.JsonHelper;
-import static com.jonwelzel.webdevtest.server.jdbi.daos.SessionDaoInterface.*;
 import com.jonwelzel.webdevtest.server.jdbi.daos.SessionDaoRedisImpl;
 import io.dropwizard.jackson.Jackson;
-import org.apache.commons.lang3.NotImplementedException;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import static org.mockito.Mockito.*;
-
 import redis.clients.jedis.Client;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Transaction;
@@ -17,7 +14,16 @@ import redis.clients.jedis.Transaction;
 import java.util.Date;
 import java.util.Map;
 
+import static com.jonwelzel.webdevtest.server.jdbi.daos.SessionDaoInterface.USER_SESSIONS;
+import static com.jonwelzel.webdevtest.server.jdbi.daos.SessionDaoInterface.USER_SESSION_HASH;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.anyMap;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by jwelzel on 01/09/15.
@@ -25,14 +31,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SessionDaoRedisTest {
 
     private UserSession session;
+    final Jedis jedis = new Jedis("localhost");
 
     @Before
     public void setUp() {
         final String id = "abc123";
         final String address = "127.0.0.1";
         final String agent = "Mozilla Firefox";
-        final Date lastAccess = new Date();
-        session = new UserSession(id, address, agent, lastAccess, "userId");
+        final String lastAccess = String.valueOf(new Date().getTime());
+        session = new UserSession(id, address, agent, lastAccess, "user123");
+        session.setDateCreated(lastAccess);
+    }
+
+    @After
+    public void tearDown() {
+        // TODO del keys etc
+        jedis.close();
     }
 
     @Test
@@ -46,7 +60,7 @@ public class SessionDaoRedisTest {
         assertThat(result.get("address")).isEqualTo(session.getAddress());
 
         assertThat(result.containsKey("lastAccess")).isTrue();
-        assertThat(result.get("lastAccess")).isEqualTo(session.getLastAccess().getTime());
+        assertThat(result.get("lastAccess")).isEqualTo(session.getLastAccess());
     }
 
     @Test
@@ -66,12 +80,24 @@ public class SessionDaoRedisTest {
         verify(mockClient).hmset(USER_SESSION_HASH + session.getId(), Jackson.newObjectMapper().convertValue(session, Map.class));
     }
 
-    @Test(expected = NotImplementedException.class)
-    public void shouldThrowExceptionWhenFindAll() {
-        Jedis mockJedis = mock(Jedis.class);
+    @Test
+    public void shouldCrud() {
+        final SessionDaoRedisImpl dao = new SessionDaoRedisImpl(jedis);
 
-        SessionDaoRedisImpl dao = new SessionDaoRedisImpl(mockJedis);
-        dao.findAll();
+        final UserSession sessionSaved = dao.save(session);
+        assertThat(sessionSaved).isNotNull();
+
+        final UserSession sessionFromFind = dao.findById(session.getUserId(), session.getId());
+        assertThat(sessionFromFind).isNotNull();
+        assertThat(sessionFromFind.getUserId()).isEqualTo(session.getUserId());
+
+        final String originalDate = session.getLastAccess();
+        final UserSession updatedSession = dao.update(session);
+        assertThat(Long.parseLong(originalDate)).isLessThan(Long.parseLong(updatedSession.getLastAccess()));
+
+        final UserSession sessionFromDelete = dao.delete(updatedSession);
+        assertThat(sessionFromDelete).isNotNull();
+        assertThat(dao.findById(sessionFromDelete.getUserId(), sessionFromDelete.getId())).isNull();
     }
 
 }

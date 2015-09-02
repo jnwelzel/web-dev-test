@@ -1,28 +1,34 @@
 package com.jonwelzel.webdevtest.server.api;
 
-import com.jonwelzel.webdevtest.server.jdbi.AbstractBaseBean;
-
-import java.util.Date;
-
 /**
  * Created by jwelzel on 31/08/15.
  */
-public class UserSession extends AbstractBaseBean {
+public class UserSession {
 
+    private String id;
     private String address;
     private String agent;
-    private Date lastAccess;
+    private String lastAccess;
+    private String dateCreated;
     private String userId;
 
     public UserSession() {
     }
 
-    public UserSession(String beanId, String address, String agent, Date lastAccess, String userId) {
+    public UserSession(String beanId, String address, String agent, String lastAccess, String userId) {
         this.id = beanId;
         this.address = address;
         this.agent = agent;
         this.lastAccess = lastAccess;
         this.userId = userId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getAddress() {
@@ -41,12 +47,20 @@ public class UserSession extends AbstractBaseBean {
         this.agent = agent;
     }
 
-    public Date getLastAccess() {
+    public String getLastAccess() {
         return lastAccess;
     }
 
-    public void setLastAccess(Date lastAccess) {
+    public void setLastAccess(String lastAccess) {
         this.lastAccess = lastAccess;
+    }
+
+    public String getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(String dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
     public String getUserId() {

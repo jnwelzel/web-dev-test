@@ -1,5 +1,6 @@
 package com.jonwelzel.webdevtest.server.unit;
 
+import org.junit.After;
 import org.junit.Test;
 import redis.clients.jedis.Jedis;
 
@@ -28,6 +29,11 @@ public class JedisTest {
 
         assertThat(jedis.get(key)).isEqualTo(value);
         assertThat(jedis.ttl(key)).isEqualTo(ttl);
+    }
+
+    @After
+    public void tearDown() {
+        jedis.close();
     }
 
     @Test

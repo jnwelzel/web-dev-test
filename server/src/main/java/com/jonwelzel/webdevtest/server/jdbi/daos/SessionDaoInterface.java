@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by jwelzel on 31/08/15.
  */
-public interface SessionDaoInterface extends BaseDao<UserSession> {
+public interface SessionDaoInterface {
 
     UserSession findById(String userId, String sessionId);
     List<UserSession> findAllByUser(String userId);

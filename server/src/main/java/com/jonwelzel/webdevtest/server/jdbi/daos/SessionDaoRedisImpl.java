@@ -2,12 +2,12 @@ package com.jonwelzel.webdevtest.server.jdbi.daos;
 
 import com.jonwelzel.webdevtest.server.api.UserSession;
 import io.dropwizard.jackson.Jackson;
-import org.apache.commons.lang3.NotImplementedException;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Transaction;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,19 +22,9 @@ public class SessionDaoRedisImpl implements SessionDaoInterface {
         this.jedis = jedis;
     }
 
-    @Override
-    public List<UserSession> findAll() {
-        throw new NotImplementedException("Essa funcionalidade não é suportada para sessões");
-    }
-
-    @Override
-    public UserSession findById(String id) {
-        throw new NotImplementedException("Favor utilizar \"findById(String userId, String sessionId)\"");
-    }
-
-    @Override
     public UserSession save(UserSession session) {
-        session.setLastAccess(new Date());
+        session.setLastAccess(String.valueOf(new Date().getTime()));
+        session.setDateCreated(String.valueOf(new Date().getTime()));
         Transaction tx = jedis.multi();
         tx.rpush(USER_SESSIONS + session.getUserId(), session.getId());
         tx.hmset(USER_SESSION_HASH + session.getUserId() + ":" + session.getId(), Jackson.newObjectMapper().convertValue(session, Map.class));
@@ -43,14 +33,16 @@ public class SessionDaoRedisImpl implements SessionDaoInterface {
         return session;
     }
 
-    @Override
     public UserSession update(UserSession session) {
-        jedis.hmset(USER_SESSION_HASH + session.getUserId() + ":" + session.getId(), Jackson.newObjectMapper().convertValue(session, Map.class));
+        Map<String, String> newAccessDate = new HashMap<>();
+        String newLastAccessDate = String.valueOf(new Date().getTime());
+        newAccessDate.put("lastAccess", newLastAccessDate);
+        session.setLastAccess(newLastAccessDate);
+        jedis.hmset(USER_SESSION_HASH + session.getUserId() + ":" + session.getId(), newAccessDate);
 
         return session;
     }
 
-    @Override
     public UserSession delete(UserSession session) {
         Transaction tx = jedis.multi();
         tx.lrem(USER_SESSIONS + session.getUserId(), 1, session.getId());
@@ -83,9 +75,20 @@ public class SessionDaoRedisImpl implements SessionDaoInterface {
     private UserSession buildFromFields(List<String> fieldValues) {
         if(fieldValues == null || fieldValues.size() != 5)
             throw new IllegalArgumentException("A lista de valores do objeto da sessão deve conter 5 itens");
+        if(allItemsAreNull(fieldValues))
+            return null;
 
         return new UserSession(fieldValues.get(0), fieldValues.get(1), fieldValues.get(2),
-                new Date(Long.getLong(fieldValues.get(3))), fieldValues.get(4));
+                (fieldValues.get(3)), fieldValues.get(4));
+    }
+
+    private boolean allItemsAreNull(List<String> fieldValues) {
+        int nullCount = 0;
+        for(String s : fieldValues) {
+            if(s == null)
+                nullCount++;
+        }
+        return nullCount == fieldValues.size();
     }
 
 }
