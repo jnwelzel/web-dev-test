@@ -26,12 +26,17 @@ public class SessionServiceImpl implements SessionServiceInterface {
 
     @Override
     public List<UserSession> userSessions(String userId) {
-        return null;
+        return dao.findAllByUser(userId);
     }
 
     @Override
     public UserSession findById(String userId, String sessionId) {
-        return null;
+        return dao.findById(userId, sessionId);
+    }
+
+    @Override
+    public UserSession updateSession(UserSession session) {
+        return dao.update(session);
     }
 
 }

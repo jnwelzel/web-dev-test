@@ -12,5 +12,6 @@ public interface SessionServiceInterface {
     UserSession newSession(UserSession session);
     List<UserSession> userSessions(String userId);
     UserSession findById(String userId, String sessionId);
+    UserSession updateSession(UserSession session);
 
 }
