@@ -34,7 +34,7 @@ public class ApplicationModule extends AbstractModule {
         // DAOs
         bind(SkillDaoInterface.class).annotatedWith(MockDao.class).to(SkillDaoMockImpl.class);
         bind(CandidateDaoInterface.class).annotatedWith(MockDao.class).to(CandidateDaoMockImpl.class);
-        bind(SessionDaoInterface.class).annotatedWith(RedisDao.class).to(SessionDaoRedisImpl.class).in(RequestScoped.class);
+        bind(SessionDaoInterface.class).annotatedWith(RedisDao.class).to(SessionDaoRedisImpl.class);
 
         // Services
         bind(SkillServiceInterface.class).to(SkillServiceImpl.class);
