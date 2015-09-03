@@ -8,15 +8,13 @@ import com.jonwelzel.webdevtest.server.api.Candidate;
 public class LoginResponseDto {
 
     private Candidate candidate;
-    private String sessionId;
     private String jwt;
 
     public LoginResponseDto() {
     }
 
-    public LoginResponseDto(Candidate candidate, String sessionId, String jwt) {
+    public LoginResponseDto(Candidate candidate, String jwt) {
         this.candidate = candidate;
-        this.sessionId = sessionId;
         this.jwt = jwt;
     }
 
@@ -26,14 +24,6 @@ public class LoginResponseDto {
 
     public void setCandidate(Candidate candidate) {
         this.candidate = candidate;
-    }
-
-    public String getSessionId() {
-        return sessionId;
-    }
-
-    public void setSessionId(String sessionId) {
-        this.sessionId = sessionId;
     }
 
     public String getJwt() {

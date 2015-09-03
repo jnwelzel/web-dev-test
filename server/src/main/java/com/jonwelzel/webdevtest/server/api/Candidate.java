@@ -57,6 +57,9 @@ public class Candidate extends AbstractBaseBean implements Principal {
     @JsonIgnore
     private boolean mobile;
 
+    @JsonProperty
+    private String sessionId;
+
     public Candidate() {
     }
 
@@ -151,6 +154,14 @@ public class Candidate extends AbstractBaseBean implements Principal {
     @JsonProperty("mobile")
     public boolean isMobile() {
         return calculateGroupScore(getSkillsByGroup(SkillGroup.MOBILE)) >= 1;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
 
     private Integer calculateGroupScore(List<Skill> skills) {

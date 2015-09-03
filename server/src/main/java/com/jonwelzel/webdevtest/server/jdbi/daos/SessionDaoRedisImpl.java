@@ -1,5 +1,6 @@
 package com.jonwelzel.webdevtest.server.jdbi.daos;
 
+import com.google.inject.Inject;
 import com.jonwelzel.webdevtest.server.api.UserSession;
 import io.dropwizard.jackson.Jackson;
 import redis.clients.jedis.Jedis;
@@ -16,12 +17,14 @@ import java.util.Map;
  */
 public class SessionDaoRedisImpl implements SessionDaoInterface {
 
-    final Jedis jedis;
+    private final Jedis jedis;
 
+    @Inject
     public SessionDaoRedisImpl(Jedis jedis) {
         this.jedis = jedis;
     }
 
+    @Override
     public UserSession save(UserSession session) {
         session.setLastAccess(String.valueOf(new Date().getTime()));
         session.setDateCreated(String.valueOf(new Date().getTime()));
@@ -33,6 +36,7 @@ public class SessionDaoRedisImpl implements SessionDaoInterface {
         return session;
     }
 
+    @Override
     public UserSession update(UserSession session) {
         Map<String, String> newAccessDate = new HashMap<>();
         String newLastAccessDate = String.valueOf(new Date().getTime());
@@ -43,6 +47,7 @@ public class SessionDaoRedisImpl implements SessionDaoInterface {
         return session;
     }
 
+    @Override
     public UserSession delete(UserSession session) {
         Transaction tx = jedis.multi();
         tx.lrem(USER_SESSIONS + session.getUserId(), 1, session.getId());

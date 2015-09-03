@@ -64,6 +64,7 @@ public class CandidateServiceImpl implements CandidateServiceInterface {
         if(!valid)
             throw new InvalidPasswordException();
 
+        candidate.setSessionId(PasswordHash.createSimpleHash());
         log.info("\"" + data.getEmail() + "\" autenticado com sucesso");
         return candidate;
     }

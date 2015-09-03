@@ -3,23 +3,27 @@ package com.jonwelzel.webdevtest.server.resources;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.inject.Inject;
 import com.jonwelzel.webdevtest.server.api.Candidate;
+import com.jonwelzel.webdevtest.server.api.UserSession;
 import com.jonwelzel.webdevtest.server.api.dtos.LoginDto;
 import com.jonwelzel.webdevtest.server.api.dtos.LoginResponseDto;
-import com.jonwelzel.webdevtest.server.core.security.PasswordHash;
 import com.jonwelzel.webdevtest.server.core.services.CandidateServiceInterface;
+import com.jonwelzel.webdevtest.server.core.services.SessionServiceInterface;
 import com.jonwelzel.webdevtest.server.core.utils.EnvVarsUtils;
 import com.jonwelzel.webdevtest.server.core.utils.JwtUtils;
-import redis.clients.jedis.JedisPool;
+import eu.bitwalker.useragentutils.UserAgent;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.Date;
 
 /**
  * Created by jwelzel on 27/08/15.
@@ -30,20 +34,34 @@ import java.security.spec.InvalidKeySpecException;
 public class SessionResource {
 
     private CandidateServiceInterface candidateService;
+    private SessionServiceInterface sessionService;
 
     @Inject
-    public SessionResource(CandidateServiceInterface candidateService) {
+    public SessionResource(CandidateServiceInterface candidateService, SessionServiceInterface sessionService) {
         this.candidateService = candidateService;
+        this.sessionService = sessionService;
     }
 
     @Path("login")
     @POST
-    public LoginResponseDto login(@Valid LoginDto data, @Context JedisPool jedis) throws InvalidKeySpecException, NoSuchAlgorithmException, JsonProcessingException {
-        jedis.getResource().hset("test", "foo", "bar");
-        final Candidate candidate = candidateService.authenticate(data);
+    public LoginResponseDto login(@Valid LoginDto data, @Context HttpServletRequest request) throws InvalidKeySpecException, NoSuchAlgorithmException, JsonProcessingException {
+        Candidate candidate = candidateService.authenticate(data);
+        sessionService.newSession(buildNewSession(candidate, request));
         final String jwt = JwtUtils.encode(EnvVarsUtils.getJwtSecret(), candidate);
-        final String sessionId = PasswordHash.createSimpleHash();
-        return new LoginResponseDto(candidate, sessionId, jwt);
+        return new LoginResponseDto(candidate, jwt);
+    }
+
+    private UserSession buildNewSession(Candidate candidate, HttpServletRequest request) {
+        UserSession session = new UserSession();
+        session.setId(candidate.getSessionId());
+        session.setAddress(request.getRemoteAddr());
+        UserAgent ua = UserAgent.parseUserAgentString(request.getHeader(HttpHeaders.USER_AGENT));
+        session.setAgent(ua.getOperatingSystem() + " - " + ua.getBrowser() + " v" + ua.getBrowserVersion());
+        String today = String.valueOf(new Date().getTime());
+        session.setDateCreated(today);
+        session.setLastAccess(today);
+        session.setUserId(candidate.getId());
+        return session;
     }
 
 }

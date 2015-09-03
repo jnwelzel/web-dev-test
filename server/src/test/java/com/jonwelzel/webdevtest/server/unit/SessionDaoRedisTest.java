@@ -45,7 +45,6 @@ public class SessionDaoRedisTest {
 
     @After
     public void tearDown() {
-        // TODO del keys etc
         jedis.close();
     }
 
@@ -70,18 +69,18 @@ public class SessionDaoRedisTest {
         Transaction spyTx = spy(new Transaction(mockClient));
         when(mockJedis.multi()).thenReturn(spyTx);
 
-        doNothing().when(mockClient).lpush(anyString(), anyString());
+        doNothing().when(mockClient).rpush(anyString(), anyString());
         doNothing().when(mockClient).hmset(anyString(), anyMap());
 
         SessionDaoRedisImpl dao = new SessionDaoRedisImpl(mockJedis);
         dao.save(session);
 
-        verify(mockClient).lpush(USER_SESSIONS + session.getUserId(), session.getId());
-        verify(mockClient).hmset(USER_SESSION_HASH + session.getId(), Jackson.newObjectMapper().convertValue(session, Map.class));
+        verify(mockClient).rpush(USER_SESSIONS + session.getUserId(), session.getId());
+        verify(mockClient).hmset(USER_SESSION_HASH + session.getUserId() + ":" + session.getId(), Jackson.newObjectMapper().convertValue(session, Map.class));
     }
 
     @Test
-    public void shouldCrud() {
+    public void daoShouldCrud() {
         final SessionDaoRedisImpl dao = new SessionDaoRedisImpl(jedis);
 
         final UserSession sessionSaved = dao.save(session);
