@@ -12,6 +12,7 @@ import javax.ws.rs.Priorities;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
 /**
@@ -34,16 +35,26 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 
         if(requestContext.getHeaders().containsKey(HttpHeaders.AUTHORIZATION)
                 && !requestContext.getUriInfo().getPath().startsWith("session/login")) {
-            Candidate jwtPrincipal = JwtUtils.decode(EnvVarsUtils.getJwtSecret(), requestContext
-                    .getHeaderString(HttpHeaders.AUTHORIZATION).split(" ")[1]);
-            UserSession userSession = sessionService.findById(jwtPrincipal.getId(), jwtPrincipal.getSessionId());
-            if(jwtPrincipal != null && userSession != null) {
-                sessionService.updateSession(userSession);
-                principal = jwtPrincipal;
+
+            final String token = verifyToken(requestContext.getHeaderString(HttpHeaders.AUTHORIZATION));
+            if(token != null) {
+                Candidate jwtPrincipal = JwtUtils.decode(EnvVarsUtils.getJwtSecret(), token);
+                UserSession userSession = sessionService.findById(jwtPrincipal.getId(), jwtPrincipal.getSessionId());
+                if (jwtPrincipal != null && userSession != null) {
+                    sessionService.updateSession(userSession);
+                    principal = jwtPrincipal;
+                }
             }
         }
 
         requestContext.setSecurityContext(new AuthenticationContext(principal));
     }
 
+    private String verifyToken(String header) {
+        String[] headerValues = header.split(" ");
+        if(headerValues.length != 2)
+            return null;
+        else
+            return headerValues[1];
+    }
 }

@@ -12,7 +12,7 @@ require('styles/Candidates.scss');
 function _buildCandidates(candidates) {
   return candidates.map(function(candidate) {
     return <CandidateCard name={candidate.name} email={candidate.email} frontend={candidate.frontend}
-      backend={candidate.backend} mobile={candidate.mobile} />;
+      backend={candidate.backend} mobile={candidate.mobile} key={candidate.id} />;
   });
 }
 

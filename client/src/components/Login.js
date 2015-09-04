@@ -7,6 +7,7 @@ var Button = belle.Button;
 var humane = require('humane-js');
 var validations = require('scripts/validations');
 var requester = require('scripts/requester');
+var SessionDao = require('scripts/SessionDao');
 
 
 require('styles/Login.scss');
@@ -63,8 +64,10 @@ var Login = React.createClass({
       humane.log(errors);
     } else {
       var params = {password: password, email: email};
-      requester.new('post', 'session/login', params).then(function(response) {
+      requester.new('post', 'session/login', params, false).then(function(response) {
         // console.log('Tudo certo %o', response);
+        SessionDao.setUser(response.data.candidate);
+        SessionDao.setToken(response.data.jwt);
         humane.log('Login realizado com sucesso');
       }.bind(this)).catch(function (response) {
         // console.log('Erro no servidor remoto %o', response);

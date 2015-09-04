@@ -51,6 +51,7 @@ public class SessionResource {
         Candidate candidate = candidateService.authenticate(data);
         sessionService.newSession(buildNewSession(candidate, request));
         final String jwt = JwtUtils.encode(EnvVarsUtils.getJwtSecret(), candidate);
+
         return new LoginResponseDto(candidate, jwt);
     }
 
@@ -58,20 +59,28 @@ public class SessionResource {
     public List<UserSession> userSessions(@Context SecurityContext sc) {
         AuthenticationContext ac = (AuthenticationContext) sc;
         Candidate candidate = (Candidate) ac.getUserPrincipal();
+
         return sessionService.userSessions(candidate.getId());
     }
 
     private UserSession buildNewSession(Candidate candidate, HttpServletRequest request) {
         UserSession session = new UserSession();
+        String today = String.valueOf(new Date().getTime());
+
         session.setId(candidate.getSessionId());
         session.setAddress(request.getRemoteAddr());
-        UserAgent ua = UserAgent.parseUserAgentString(request.getHeader(HttpHeaders.USER_AGENT));
-        session.setAgent(ua.getOperatingSystem() + " - " + ua.getBrowser() + " v" + ua.getBrowserVersion());
-        String today = String.valueOf(new Date().getTime());
+        session.setAgent(formatUserAgent(request.getHeader(HttpHeaders.USER_AGENT)));
         session.setDateCreated(today);
         session.setLastAccess(today);
         session.setUserId(candidate.getId());
+
         return session;
+    }
+
+    private String formatUserAgent(String ua) {
+        UserAgent agent = UserAgent.parseUserAgentString(ua);
+
+        return agent.getOperatingSystem() + " - " + agent.getBrowser() + " v" + agent.getBrowserVersion();
     }
 
 }
