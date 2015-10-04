@@ -17,6 +17,7 @@ function _setToken(token) {
 }
 
 var _loginErrorMsg = null;
+var _sessionsList = null;
 
 var SessionStore = assign({}, EventEmitter.prototype, {
 
@@ -46,6 +47,10 @@ var SessionStore = assign({}, EventEmitter.prototype, {
 
   getLoginErrorMessage: function() {
     return _loginErrorMsg;
+  },
+
+  getSessionsList: function() {
+    return _sessionsList;
   }
 
 });
@@ -62,6 +67,11 @@ SessionStore.dispatchToken = ClientAppDispatcher.register(function(action) {
 
     case ActionTypes.LOGIN_ERROR:
       _loginErrorMsg = action.message;
+      SessionStore.emitChange();
+      break;
+
+    case ActionTypes.SESSIONS_LIST:
+      _sessionsList = action.sessions;
       SessionStore.emitChange();
       break;
 

@@ -30,6 +30,19 @@ module.exports = {
         message: message
       });
     });
+  },
+
+  getAllSessions: function(callbackFn) {
+    request.new('get', 'session/my-sessions').then(function(response) {
+      callbackFn({
+        success: true,
+        sessions: response.data
+      });
+    }).catch(function(response) {
+      callbackFn({
+        success: false
+      });
+    });
   }
 
 };

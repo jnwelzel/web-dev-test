@@ -3,6 +3,7 @@
 var React = require('react/addons');
 var Link = require('react-router').Link;
 var SessionStore = require('stores/SessionStore');
+var SessionActions = require('actions/SessionActionCreators');
 
 
 require('styles/Header.scss');
@@ -39,7 +40,8 @@ var Header = React.createClass({
                   <span>
                     <ul>
                       <li><Link to="candidates">Candidatos</Link></li>
-                      <li><a href="">Logout</a></li>
+                      <li><Link to="sessions">Sessões</Link></li>
+                      <li><a href="#" onClick={this._logout}>Logout</a></li>
                     </ul>
                   </span>
                 ) : (
@@ -51,6 +53,11 @@ var Header = React.createClass({
         </div>
       </div>
     );
+  },
+
+  _logout: function() {
+    console.log('_logout');
+    SessionActions.closeSession();
   }
 
 });

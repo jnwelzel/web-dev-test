@@ -2,12 +2,12 @@
 
 var Dispatcher = require('../dispatcher/ClientAppDispatcher');
 var ActionTypes = require('scripts/constants');
-var Api = require('scripts/WebApiUtils');
+var API = require('scripts/WebApiUtils');
 
 var SessionActionCreators = {
 
   newSession: function(email, password) {
-    Api.authenticateUser(email, password, function(resp) {
+    API.authenticateUser(email, password, function(resp) {
       var dispatchObj;
       if(resp.success) {
         dispatchObj = {
@@ -20,6 +20,23 @@ var SessionActionCreators = {
           type: ActionTypes.LOGIN_ERROR,
           message: resp.message
         };
+      }
+
+      Dispatcher.dispatch(dispatchObj);
+    });
+  },
+
+  closeSession: function() {
+    // TODO
+  },
+
+  showAllSessions: function() {
+    API.getAllSessions(function(response) {
+      var dispatchObj = { type: ActionTypes.SESSIONS_LIST };
+      if(response.success) {
+        dispatchObj.sessions = response.sessions;
+      } else {
+        dispatchObj.sessions = [];
       }
 
       Dispatcher.dispatch(dispatchObj);

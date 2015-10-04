@@ -9,6 +9,7 @@ var validations = require('scripts/validations');
 var requester = require('scripts/requester');
 var SessionStore = require('stores/SessionStore');
 var SessionActions = require('actions/SessionActionCreators');
+var Navigation = require('react-router').Navigation;
 
 
 require('styles/Login.scss');
@@ -31,6 +32,8 @@ function _validateFields(email, password) {
 
 
 var Login = React.createClass({
+
+  mixins: [Navigation],
 
   render: function () {
     return (
@@ -64,6 +67,7 @@ var Login = React.createClass({
       humane.log(loginErrorMsg);
     } else {
       humane.log('Login realizado com sucesso');
+      this.transitionTo('/');
     }
   },
 

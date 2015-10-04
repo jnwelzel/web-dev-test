@@ -11,6 +11,7 @@ var Content = require('./Content');
 var Registration = require('./Registration');
 var Candidates = require('./Candidates');
 var Login = require('./Login');
+var Sessions = require('./SessionsList');
 
 var content = document.getElementById('content');
 
@@ -20,6 +21,7 @@ var Routes = (
     <Route name="registration" handler={Registration}/>
     <Route name="candidates" handler={Candidates}/>
     <Route name="login" handler={Login}/>
+    <Route name="sessions" handler={Sessions}/>
     <Route name="/" handler={Content}/>
   </Route>
 );
