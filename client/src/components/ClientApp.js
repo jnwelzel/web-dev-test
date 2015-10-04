@@ -24,7 +24,7 @@ belle.style.card.style = {
 var ClientApp = React.createClass({
   render: function() {
     return (
-      <div className="main">
+      <div className="main" ref="ClientApp">
         <ReactTransitionGroup transitionName="fade">
           <Header/>
           <RouteHandler/>

@@ -7,7 +7,8 @@ var Button = belle.Button;
 var humane = require('humane-js');
 var validations = require('scripts/validations');
 var requester = require('scripts/requester');
-var SessionDao = require('scripts/SessionDao');
+var SessionStore = require('stores/SessionStore');
+var SessionActions = require('actions/SessionActionCreators');
 
 
 require('styles/Login.scss');
@@ -49,12 +50,29 @@ var Login = React.createClass({
     );
   },
 
+  componentWillMount: function() {
+    SessionStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount: function() {
+    SessionStore.removeChangeListener(this._onChange);
+  },
+
+  _onChange: function() {
+    console.log('_onChange: function()');
+    var loginErrorMsg = SessionStore.getLoginErrorMessage();
+    if(loginErrorMsg !== null) {
+      humane.log(loginErrorMsg);
+    } else {
+      humane.log('Login realizado com sucesso');
+    }
+  },
+
   componentDidMount: function() {
     React.findDOMNode(this.refs.email).focus();
   },
 
   _submitForm: function(e) {
-    console.log('_submitForm');
     e.preventDefault();
 
     var password = React.findDOMNode(this.refs.password).value.trim();
@@ -63,25 +81,8 @@ var Login = React.createClass({
     if(errors.length > 0) {
       humane.log(errors);
     } else {
-      var params = {password: password, email: email};
-      requester.new('post', 'session/login', params, false).then(function(response) {
-        // console.log('Tudo certo %o', response);
-        SessionDao.setUser(response.data.candidate);
-        SessionDao.setToken(response.data.jwt);
-        humane.log('Login realizado com sucesso');
-      }.bind(this)).catch(function (response) {
-        // console.log('Erro no servidor remoto %o', response);
-        switch (response.status) {
-          case 404:
-            humane.log('Nenhum registro foi encontrado com o e-mail informado');
-            break;
-          case 403:
-            humane.log('A senha informada é inválida');
-            break;
-          default:
-            humane.log('Desculpe-nos mas parece que nossos servidores estão com problemas :(');
-        }
-      });
+      console.log('asdasdasd');
+      SessionActions.newSession(email, password);
     }
   }
 

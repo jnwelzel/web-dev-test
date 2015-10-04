@@ -2,12 +2,31 @@
 
 var React = require('react/addons');
 var Link = require('react-router').Link;
-var SessionDao = require('scripts/SessionDao');
+var SessionStore = require('stores/SessionStore');
 
 
 require('styles/Header.scss');
 
 var Header = React.createClass({
+
+  getInitialState: function() {
+    return {
+      isLoggedIn: SessionStore.isLoggedIn()
+    };
+  },
+
+  componentWillMount: function() {
+    SessionStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount: function() {
+    SessionStore.removeChangeListener(this._onChange);
+  },
+
+  _onChange: function() {
+    console.log('_onChange: function()');
+    this.setState({isLoggedIn: SessionStore.isLoggedIn()});
+  },
 
   render: function () {
     return (
@@ -17,7 +36,7 @@ var Header = React.createClass({
             <div className="content">
               <a href="/#">Cadastro de Candidatos</a>
               {
-                SessionDao.isLoggedIn() ? (
+                this.state.isLoggedIn ? (
                   <span>
                     <ul>
                       <li><Link to="candidates">Candidatos</Link></li>
@@ -34,6 +53,7 @@ var Header = React.createClass({
       </div>
     );
   }
+
 });
 
 module.exports = Header;
