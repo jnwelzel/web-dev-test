@@ -59,7 +59,6 @@ var Login = React.createClass({
   },
 
   _onChange: function() {
-    console.log('_onChange: function()');
     var loginErrorMsg = SessionStore.getLoginErrorMessage();
     if(loginErrorMsg !== null) {
       humane.log(loginErrorMsg);

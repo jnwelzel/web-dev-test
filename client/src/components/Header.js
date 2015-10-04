@@ -24,7 +24,6 @@ var Header = React.createClass({
   },
 
   _onChange: function() {
-    console.log('_onChange: function()');
     this.setState({isLoggedIn: SessionStore.isLoggedIn()});
   },
 

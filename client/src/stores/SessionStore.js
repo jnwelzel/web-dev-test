@@ -45,7 +45,6 @@ var SessionStore = assign({}, EventEmitter.prototype, {
   },
 
   getLoginErrorMessage: function() {
-    console.log('getLoginErrorMessage: function()');
     return _loginErrorMsg;
   }
 
@@ -55,7 +54,6 @@ SessionStore.dispatchToken = ClientAppDispatcher.register(function(action) {
 
   switch(action.type) {
     case ActionTypes.LOGIN_SUCCESSFUL:
-      console.log('SessionStore LOGIN_SUCCESSFUL');
       _setUser(action.user);
       _setToken(action.token);
       _loginErrorMsg = null;
@@ -63,7 +61,6 @@ SessionStore.dispatchToken = ClientAppDispatcher.register(function(action) {
       break;
 
     case ActionTypes.LOGIN_ERROR:
-      console.log('SessionStore LOGIN_ERROR');
       _loginErrorMsg = action.message;
       SessionStore.emitChange();
       break;

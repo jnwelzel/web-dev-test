@@ -26,6 +26,6 @@ var SessionActionCreators = {
     });
   }
 
-}
+};
 
 module.exports = SessionActionCreators;
