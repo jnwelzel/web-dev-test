@@ -24,7 +24,7 @@ var Candidates = React.createClass({
         <div className="grid grid-pad">
           <div className="col-1-1">
             <div className="content">
-              <h1>Lista de Candidatos</h1>
+              <h1 className="title">Lista de Candidatos</h1>
               <span className="subtitle">Confira abaixo os candidatos que já se cadastraram</span>
             </div>
           </div>

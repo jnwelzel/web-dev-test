@@ -13,5 +13,6 @@ public interface SessionServiceInterface {
     List<UserSession> userSessions(String userId);
     UserSession findById(String userId, String sessionId);
     UserSession updateSession(UserSession session);
+    UserSession destroySession(String userId, String sessionId);
 
 }

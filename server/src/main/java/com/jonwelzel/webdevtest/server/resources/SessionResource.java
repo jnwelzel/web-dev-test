@@ -49,7 +49,6 @@ public class SessionResource {
         return new LoginResponseDto(candidate, jwt);
     }
 
-    @Path("my-sessions")
     @GET
     @RolesAllowed({"USER", "ADMIN"})
     public List<UserSession> userSessions(@Context SecurityContext sc) {
@@ -60,8 +59,11 @@ public class SessionResource {
 
     @DELETE
     @RolesAllowed({"USER", "ADMIN"})
-    public Response logout() {
-        return null;
+    public Response logout(@Context SecurityContext context) {
+        Candidate candidate = (Candidate) context.getUserPrincipal();
+        boolean result = sessionService.destroySession(candidate.getId(), candidate.getSessionId());
+
+        return Response.status(result ? 200 : 500).build();
     }
 
     private UserSession buildNewSession(Candidate candidate, HttpServletRequest request) {

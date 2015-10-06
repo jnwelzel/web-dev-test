@@ -33,7 +33,7 @@ module.exports = {
   },
 
   getAllSessions: function(callbackFn) {
-    request.new('get', 'session/my-sessions').then(function(response) {
+    request.new('get', 'session').then(function(response) {
       callbackFn({
         success: true,
         sessions: response.data

@@ -15,6 +15,11 @@ public class UserSession {
     public UserSession() {
     }
 
+    public UserSession(String id, String userId) {
+        this.id = id;
+        this.userId = userId;
+    }
+
     public UserSession(String beanId, String address, String agent, String lastAccess, String userId) {
         this.id = beanId;
         this.address = address;

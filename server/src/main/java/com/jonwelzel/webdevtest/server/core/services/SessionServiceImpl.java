@@ -39,4 +39,11 @@ public class SessionServiceImpl implements SessionServiceInterface {
         return dao.update(session);
     }
 
+    @Override
+    public UserSession destroySession(String userId, String sessionId) {
+        UserSession session = new UserSession(sessionId, userId);
+        dao.delete(session);
+        return session;
+    }
+
 }

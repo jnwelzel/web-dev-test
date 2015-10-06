@@ -1,3 +1,13 @@
-.SessionsListItem {
+@import "colors";
 
+.SessionsListItem {
+  line-height: 35px;
+}
+
+.SessionsListItem .active {
+  background-color: $light-blue;
+}
+
+.SessionsListItem .grid {
+  padding-left: 20px;
 }

@@ -16,6 +16,7 @@
     "flux": "^2.0.1",
     "humane-js": "^3.2.2",
     "keymirror": "^0.1.1",
+    "moment": "^2.10.6",
     "normalize.css": "~3.0.3",
     "object-assign": "^2.0.0",
     "react": "0.13.x",
