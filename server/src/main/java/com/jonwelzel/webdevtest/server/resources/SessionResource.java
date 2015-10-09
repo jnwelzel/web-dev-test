@@ -61,9 +61,9 @@ public class SessionResource {
     @RolesAllowed({"USER", "ADMIN"})
     public Response logout(@Context SecurityContext context) {
         Candidate candidate = (Candidate) context.getUserPrincipal();
-        boolean result = sessionService.destroySession(candidate.getId(), candidate.getSessionId());
+        sessionService.destroySession(candidate.getId(), candidate.getSessionId());
 
-        return Response.status(result ? 200 : 500).build();
+        return Response.status(200).build();
     }
 
     private UserSession buildNewSession(Candidate candidate, HttpServletRequest request) {

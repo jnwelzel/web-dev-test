@@ -9,6 +9,7 @@ module.exports = keyMirror({
 
   // Session
   NEW_SESSION: null,
+  SESSION_DESTROY: null,
   LOGIN_SUCCESSFUL: null,
   LOGIN_ERROR: null,
   SESSIONS_LIST: null

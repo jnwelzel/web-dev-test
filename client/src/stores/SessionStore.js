@@ -16,6 +16,11 @@ function _setToken(token) {
   cookies.setItem('token', token, Infinity);
 }
 
+function _destroySession() {
+  cookies.removeItem('user');
+  cookies.removeItem('token');
+}
+
 var _loginErrorMsg = null;
 var _sessionsList = null;
 
@@ -72,6 +77,11 @@ SessionStore.dispatchToken = ClientAppDispatcher.register(function(action) {
 
     case ActionTypes.SESSIONS_LIST:
       _sessionsList = action.sessions;
+      SessionStore.emitChange();
+      break;
+
+    case ActionTypes.SESSION_DESTROY:
+      _destroySession();
       SessionStore.emitChange();
       break;
 

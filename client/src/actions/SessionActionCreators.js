@@ -12,8 +12,8 @@ var SessionActionCreators = {
       if(resp.success) {
         dispatchObj = {
           type: ActionTypes.LOGIN_SUCCESSFUL,
-          candidate: resp.candidate,
-          jwt: resp.jwt
+          user: resp.user,
+          token: resp.token
         };
       } else {
         dispatchObj = {
@@ -26,8 +26,19 @@ var SessionActionCreators = {
     });
   },
 
-  closeSession: function() {
+  destroySession: function() {
     // TODO
+    API.destroyCurrentSession(function(response) {
+      if(response.success) {
+        var dispatchObj = {
+          type: ActionTypes.SESSION_DESTROY
+        };
+        
+        Dispatcher.dispatch(dispatchObj);
+      } else {
+        console.log('Erro ao fazer logout');
+      }
+    });
   },
 
   showAllSessions: function() {

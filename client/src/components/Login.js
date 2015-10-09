@@ -84,7 +84,6 @@ var Login = React.createClass({
     if(errors.length > 0) {
       humane.log(errors);
     } else {
-      console.log('asdasdasd');
       SessionActions.newSession(email, password);
     }
   }

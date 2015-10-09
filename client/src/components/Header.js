@@ -57,7 +57,7 @@ var Header = React.createClass({
 
   _logout: function() {
     console.log('_logout');
-    SessionActions.closeSession();
+    SessionActions.destroySession();
   }
 
 });

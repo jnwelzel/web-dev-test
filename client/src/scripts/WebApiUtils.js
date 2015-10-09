@@ -9,8 +9,8 @@ module.exports = {
     request.new('post', 'session/login', params, false).then(function(response) {
       callbackFn({
         success: true,
-        candidate: response.data.candidate,
-        jwt: response.data.jwt
+        user: response.data.candidate,
+        token: response.data.jwt
       });
     }).catch(function (response) {
       var message;
@@ -34,6 +34,19 @@ module.exports = {
 
   getAllSessions: function(callbackFn) {
     request.new('get', 'session').then(function(response) {
+      callbackFn({
+        success: true,
+        sessions: response.data
+      });
+    }).catch(function(response) {
+      callbackFn({
+        success: false
+      });
+    });
+  },
+
+  destroyCurrentSession: function(callbackFn) {
+    request.new('delete', 'session').then(function(response) {
       callbackFn({
         success: true,
         sessions: response.data
